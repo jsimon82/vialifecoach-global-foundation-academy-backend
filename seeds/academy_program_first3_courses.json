@@ -1,0 +1,293 @@
+{
+  "program": {
+    "slug": "vialifecoach-academy-level-1-foundation",
+    "title": "Vialifecoach Academy Program - Level 1 Foundation",
+    "description": "A transformational learning journey built around four pillars: Mindset and Personal Mastery, Productivity and Success Strategies, Leadership and Influence, and Resilience, Well-Being, and Social Impact.",
+    "level": 1,
+    "pillars": [
+      "Mindset and Personal Mastery",
+      "Productivity and Success Strategies",
+      "Leadership and Influence",
+      "Resilience, Well-Being, and Social Impact"
+    ]
+  },
+  "introductory_course": {
+    "course_code": "L1-INTRO-4P",
+    "title": "Program Orientation: Foundations Across the Four Pillars",
+    "format": "Coursera-style",
+    "duration": "1 week",
+    "overview": "This orientation course introduces the full learning architecture of the Academy. Learners map their current life position, define growth outcomes, and understand how the four pillars integrate into one development system. The orientation is designed to prepare learners for deep work, personal reflection, measurable progress, and applied transformation.",
+    "learning_outcomes": [
+      "Understand how the four pillars connect into one personal growth framework.",
+      "Define baseline goals for confidence, focus, leadership, and resilience.",
+      "Set a personal commitment contract for the full pathway.",
+      "Build a weekly learning routine and accountability structure."
+    ],
+    "modules": [
+      {
+        "title": "Module 1: The Academy Blueprint",
+        "lessons": [
+          {
+            "title": "Lesson 1.1: Why the Four Pillars Matter Together",
+            "content_markdown": "The Academy is designed as an integrated system, not a collection of isolated topics. Mindset gives direction, productivity creates execution, leadership multiplies impact, and resilience sustains the journey. Growth is most durable when all four dimensions are trained together."
+          },
+          {
+            "title": "Lesson 1.2: Personal Baseline Mapping",
+            "content_markdown": "Learners complete a baseline self-assessment across confidence, procrastination patterns, communication, stress response, and purpose alignment. This baseline becomes the starting point for measurable progress through all courses."
+          }
+        ]
+      },
+      {
+        "title": "Module 2: Learning for Transformation",
+        "lessons": [
+          {
+            "title": "Lesson 2.1: Reflection, Practice, and Accountability",
+            "content_markdown": "Transformation requires repetition. Learners are expected to complete weekly reflections, action tasks, and accountability check-ins. The principle is simple: insight without action does not produce change."
+          },
+          {
+            "title": "Lesson 2.2: Building Your Commitment Contract",
+            "content_markdown": "Each learner writes a commitment contract including daily practice habits, weekly review rituals, and a support partner. This commitment turns intention into structure."
+          }
+        ]
+      }
+    ]
+  },
+  "courses": [
+    {
+      "course_code": "L1-P1-C1",
+      "title": "The Confidence Code: Building Unstoppable Self-Belief",
+      "pillar": "Mindset and Personal Mastery",
+      "duration": "4 weeks",
+      "level": "Beginner",
+      "overview": "Your mind is extraordinarily powerful. Your thoughts shape energy, emotions, and destiny. Confidence is not an inborn gift; it is a trainable identity built through intentional thinking, courageous action, and repeated self-trust. This course helps learners decode and strengthen inner belief so they can perform under pressure, recover from setbacks, and move forward with conviction.",
+      "objectives": [
+        "Understand how thoughts shape self-belief and behavior.",
+        "Identify and challenge negative self-talk.",
+        "Practice techniques that strengthen self-esteem and self-worth.",
+        "Develop a growth-oriented mindset for challenges.",
+        "Act confidently in uncertain situations."
+      ],
+      "modules": [
+        {
+          "title": "Module 1: The Psychology of Confidence",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Confidence Begins in Thought",
+              "content_markdown": "Confidence begins in the mind. Dominant thoughts become dominant behavior. Your self-concept acts as an internal thermostat, regulating how far you allow yourself to go. When you repeatedly see yourself as capable, the brain aligns emotion and action with that identity. Repetition of constructive self-belief builds neural pathways that make confidence feel natural.\n\nQuote focus: \"As a man thinketh in his heart, so is he\" (Proverbs 23:7)."
+            },
+            {
+              "title": "Lesson 1.2: Self-Image and Performance",
+              "content_markdown": "Performance is often a mirror of identity. People who believe they are resourceful, worthy, and able to learn from failure are more likely to take initiative. This lesson introduces self-image recalibration through reflection prompts and identity-based affirmations."
+            }
+          ]
+        },
+        {
+          "title": "Module 2: Breaking the Cycle of Self-Doubt",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Spotting the Voice of Doubt",
+              "content_markdown": "Self-doubt grows through comparison, harsh self-judgment, and fixation on past failure. Confidence grows through evidence of progress. Learners will identify their top recurring doubt scripts and replace them with growth statements."
+            },
+            {
+              "title": "Lesson 2.2: Reframing Through Micro-Wins",
+              "content_markdown": "Use a daily victory log: write three actions you completed, even small ones. This trains the mind to recognize capability instead of deficiency. Every confident person once felt uncertain; confidence develops when action continues anyway."
+            }
+          ]
+        },
+        {
+          "title": "Module 3: The Habit of Bold Action",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Courage in Practice",
+              "content_markdown": "Courage is not the absence of fear but movement despite fear. Each bold action creates memory evidence that reduces future hesitation. Start with small risks: speak up, share a viewpoint, initiate a difficult conversation, or volunteer for responsibility."
+            },
+            {
+              "title": "Lesson 3.2: Action Creates Confidence",
+              "content_markdown": "Confidence is built through repetition, not luck. Learners practice the 24-hour courage rule: take one action within 24 hours of identifying an opportunity.\n\nQuote focus: \"Faith without works is dead\" (James 2:17)."
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Building Inner Strength and Long-Term Confidence",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Resilience Over Perfection",
+              "content_markdown": "True confidence does not come from being flawless. It comes from recovering quickly and staying anchored when life shakes you. Learners develop a resilience routine using reflection, affirmations, and emotional reset tools."
+            },
+            {
+              "title": "Lesson 4.2: The Confidence Code in Daily Life",
+              "content_markdown": "Live confidently by reframing challenges as growth opportunities, choosing progress over perfection, and recalling past victories before high-pressure tasks.\n\nAffirmation model: \"I am capable. I am growing. I am enough.\"\n\nQuote focus: \"I can do all things through Christ who strengthens me\" (Philippians 4:13)."
+            }
+          ]
+        }
+      ],
+      "final_reflection": "Confidence is cultivated daily through awareness, action, and faith. Your thoughts are seeds; plant confidence and you harvest courage, consistency, and results."
+    },
+    {
+      "course_code": "L1-P1-C2",
+      "title": "Overcoming Negative Thinking: Rewiring Your Brain for Positivity",
+      "pillar": "Mindset and Personal Mastery",
+      "duration": "5 weeks",
+      "level": "Beginner to Intermediate",
+      "overview": "Negative thinking is not destiny. It is a learned mental program that can be unlearned through neuroplasticity, awareness, and disciplined cognitive practice. This course teaches learners to identify destructive thought patterns, challenge distortions, and build emotional clarity, optimism, and resilience.",
+      "objectives": [
+        "Explain how negative thinking develops and influences well-being.",
+        "Identify common cognitive distortions.",
+        "Apply practical methods to interrupt and replace negative thoughts.",
+        "Build optimism and resilience through daily mental habits.",
+        "Create a long-term strategy for mental balance."
+      ],
+      "modules": [
+        {
+          "title": "Module 1: The Science of Thought",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Neuroplasticity and Mental Patterns",
+              "content_markdown": "Your brain rewires based on repetition. Each thought strengthens a pathway. Repeated negative thoughts train the brain to scan for danger; repeated constructive thoughts train it to notice options and resources. Thought management is future management."
+            },
+            {
+              "title": "Lesson 1.2: Emotional Chemistry of Thought",
+              "content_markdown": "Negative thoughts trigger stress chemistry and narrowed perception. Constructive thoughts increase calm, motivation, and creativity. This lesson introduces a thought-chemistry tracker to map triggers and emotional outcomes."
+            }
+          ]
+        },
+        {
+          "title": "Module 2: The Nature of Negative Thinking",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Core Beliefs and Internal Scripts",
+              "content_markdown": "Many negative beliefs begin in early emotional experiences and become internal scripts: \"I am not enough,\" \"Nothing works out for me,\" or \"I cannot trust anyone.\" Learners identify and map their top three inherited scripts."
+            },
+            {
+              "title": "Lesson 2.2: Beliefs vs. Events",
+              "content_markdown": "Following REBT principles, distress is often created by interpretation rather than event alone. The shift begins when learners ask: What happened? What did I tell myself it means? Is that story fully true?"
+            }
+          ]
+        },
+        {
+          "title": "Module 3: Recognizing Cognitive Distortions",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Distortion Types and Detection",
+              "content_markdown": "Key distortions include catastrophizing, personalization, all-or-nothing thinking, and filtering. Labeling a distortion weakens its emotional grip and creates mental distance from it."
+            },
+            {
+              "title": "Lesson 3.2: Distortion-to-Truth Practice",
+              "content_markdown": "Learners convert distorted statements into balanced truth statements. Example: \"If this fails, everything is over\" becomes \"This may be difficult, but one event does not define my future.\""
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Rewiring for Positivity",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Interrupt, Question, Replace",
+              "content_markdown": "Use a 3-step reset: Interrupt the thought, question its accuracy, replace it with a constructive alternative. Practice this repeatedly until it becomes automatic under stress."
+            },
+            {
+              "title": "Lesson 4.2: Systemizing Better Thinking",
+              "content_markdown": "Goals do not sustain mindset change; systems do. Learners build a daily thinking system with morning intention, midday reset, and evening reframing review."
+            }
+          ]
+        },
+        {
+          "title": "Module 5: Gratitude, Perspective, and Environment",
+          "lessons": [
+            {
+              "title": "Lesson 5.1: Gratitude as Cognitive Training",
+              "content_markdown": "Gratitude is not denial of pain; it is disciplined attention to what is still working. Daily gratitude practice shifts perception from scarcity toward resourcefulness and strengthens motivation."
+            },
+            {
+              "title": "Lesson 5.2: Designing a Positive Mental Ecosystem",
+              "content_markdown": "Your environment shapes your mental tone. Curate inputs: conversations, media, books, and communities. Positivity becomes sustainable when your ecosystem supports it."
+            }
+          ]
+        }
+      ],
+      "final_reflection": "Negative thinking is a habit, not an identity. Every constructive thought is a vote for the person you are becoming."
+    },
+    {
+      "course_code": "L1-P2-C3",
+      "title": "Overcoming Procrastination: How to Get Things Done Now",
+      "pillar": "Productivity and Success Strategies",
+      "duration": "5 weeks",
+      "level": "Beginner",
+      "overview": "Procrastination is not a time problem. It is a regulation problem where short-term comfort overrides meaningful action. This course helps learners understand the psychology behind delay and build systems that turn intention into consistent execution.",
+      "objectives": [
+        "Identify psychological causes of procrastination.",
+        "Understand emotional triggers of delay and avoidance.",
+        "Apply science-backed anti-procrastination techniques.",
+        "Build self-discipline and an execution mindset.",
+        "Create sustainable systems for consistent output."
+      ],
+      "modules": [
+        {
+          "title": "Module 1: The Psychology Behind Procrastination",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Why We Delay",
+              "content_markdown": "Procrastination is often emotional mismanagement, not laziness. We avoid tasks that trigger discomfort: fear of failure, uncertainty, frustration, or perfection pressure. Understanding this reduces self-blame and improves strategy selection."
+            },
+            {
+              "title": "Lesson 1.2: Mood Repair vs. Long-Term Reward",
+              "content_markdown": "The brain prefers immediate relief over delayed reward. Learners map their common comfort substitutions (scrolling, avoidance tasks, over-planning) and design response alternatives."
+            }
+          ]
+        },
+        {
+          "title": "Module 2: The Illusion of Later",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Future-Self Myth",
+              "content_markdown": "\"Later\" feels strategic but often postpones the same emotional difficulty. The future self is likely to face the same resistance unless systems change now."
+            },
+            {
+              "title": "Lesson 2.2: Decision Management",
+              "content_markdown": "Execution improves when decisions are pre-made. Learners apply if-then rules: \"If it is 8:00 PM, I begin 25 minutes of focused study.\" Reducing decision friction reduces delay."
+            }
+          ]
+        },
+        {
+          "title": "Module 3: Emotional Resistance and the Fear of Starting",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Activation Threshold",
+              "content_markdown": "Starting is the hardest part. Once action begins, resistance drops. Learners use activation rituals and countdown entry methods to lower start friction."
+            },
+            {
+              "title": "Lesson 3.2: The 2-Minute Rule",
+              "content_markdown": "Start with a two-minute version of the task: open the file, write one line, read one paragraph, wear gym shoes. Initial motion generates momentum and dopamine reinforcement."
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Perfectionism and Momentum",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Perfectionism as Hidden Delay",
+              "content_markdown": "Many delays are fear of imperfect output. The shift is from perfection to iteration: produce draft one, then improve. Progress compounds; perfection stalls."
+            },
+            {
+              "title": "Lesson 4.2: Small Wins Framework",
+              "content_markdown": "Break tasks into low-friction substeps, complete one visible unit at a time, and celebrate completion. Momentum is built from consistency, not intensity."
+            }
+          ]
+        },
+        {
+          "title": "Module 5: Environment, Focus, and Accountability",
+          "lessons": [
+            {
+              "title": "Lesson 5.1: Designing for Focus",
+              "content_markdown": "Use a distraction-resistant setup: clean workspace, muted notifications, and time-boxed focus intervals (Pomodoro). Protect attention like a limited asset."
+            },
+            {
+              "title": "Lesson 5.2: Accountability Systems",
+              "content_markdown": "Public commitments increase follow-through. Learners build accountability loops with peers, mentors, or digital trackers. The principle is simple: what gets reported gets done."
+            }
+          ]
+        }
+      ],
+      "final_reflection": "The question is no longer \"Can I do it?\" but \"Will I start now?\" Action in small consistent steps rewrites identity into someone who follows through."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "course_code": "L1-P2-C5",
+  "title": "Goal-Setting Mastery: Creating and Crushing Your Goals",
+  "pillar": "Productivity and Success Strategies",
+  "level": "Beginner",
+  "duration": "6 weeks",
+  "format": "Coursera-style",
+  "preface": "Goal-Setting Mastery: Creating and Crushing Your Goals was created to help you turn your dreams into actionable plans and your plans into measurable results. Setting goals is not just about wishing for success — it is about defining clear steps, building consistent habits, and taking deliberate action every day. This course guides you through what drives your goals, how to structure them effectively, and how to overcome obstacles that slow progress.",
+  "dedication": "To everyone who dares to dream beyond their limits — may this course remind you that goals are not just wishes, but blueprints for success. May you find the focus, courage, and discipline to turn your ambitions into achievements.",
+  "objectives": [
+    "Understand the psychology behind goal achievement.",
+    "Identify and set SMART goals aligned with purpose.",
+    "Break large goals into small, achievable milestones.",
+    "Build consistency and resilience when facing challenges.",
+    "Develop systems and habits that turn goals into lasting success."
+  ],
+  "introduction": "Your goals are the blueprint of your future. Every great achievement begins with clear vision and committed action. Goal-setting mastery is about taking control — defining what you want, why you want it, and how you will make it happen. This course transforms vague dreams into precise, measurable actions and helps you maintain momentum until results are achieved.",
+  "modules": [
+    {
+      "title": "Chapter 1: The Power of Clear Intentions",
+      "lessons": [
+        {
+          "title": "Clarity Creates Direction",
+          "content_markdown": "Everything starts with clarity. Without a target, the mind has no direction. When goals are specific and emotionally meaningful, attention systems such as the Reticular Activating System (RAS) begin filtering opportunities aligned to that direction. Quote focus: \"A person who aims at nothing is sure to hit it.\" - Zig Ziglar.\n\nKey exercise: write 3 specific 12-month goals and define the deeper why behind each."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 2: Designing SMART Goals",
+      "lessons": [
+        {
+          "title": "From Dream to Structured Goal",
+          "content_markdown": "A dream becomes actionable when it is Specific, Measurable, Achievable, Relevant, and Time-bound. Learners practice converting vague outcomes into precise commitments with clear measurement methods, review checkpoints, and deadlines."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 3: Building Systems and Habits",
+      "lessons": [
+        {
+          "title": "Systems Sustain What Motivation Starts",
+          "content_markdown": "Motivation can initiate action, but systems preserve progress. Build recurring behavior loops (daily actions, weekly reviews, milestone tracking). If the goal is writing a book, the system is writing a fixed word count consistently. Future outcomes are built by repeated practice, not occasional effort."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 4: Mental Barriers and Self-Sabotage",
+      "lessons": [
+        {
+          "title": "Overcoming Inner Resistance",
+          "content_markdown": "Fear, perfectionism, and doubt delay execution. Procrastination is often emotional regulation failure, not planning failure. Reframe setbacks as data. Replace all-or-nothing thinking with iterative progress. Quote focus: \"You don’t rise to the level of your goals; you fall to the level of your systems.\" - James Clear."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 5: Tracking Progress and Staying Accountable",
+      "lessons": [
+        {
+          "title": "Measurement and Accountability",
+          "content_markdown": "High performers review progress weekly. Track wins, friction points, and next actions. Accountability with mentors, peers, or systems significantly increases completion rates. Celebrating small wins reinforces identity and motivation."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 6: Sustaining Motivation and Momentum",
+      "lessons": [
+        {
+          "title": "Long-Term Discipline and Energy",
+          "content_markdown": "Discipline is action even when mood is low. Sustain momentum by visualizing outcomes, rewarding progress, and reconnecting to purpose regularly. Momentum grows when execution becomes habitual."
+        }
+      ]
+    }
+  ],
+  "final_reflection": "Goal-setting mastery is a science of clarity, focus, and consistent execution. Every achieved goal strengthens belief, discipline, and identity. You are not merely setting goals — you are designing your life architecture.",
+  "key_takeaways": [
+    "Clarity gives direction.",
+    "SMART goals make progress measurable.",
+    "Systems and habits are engines of achievement.",
+    "Fear and procrastination are emotional signals, not destiny.",
+    "Accountability accelerates results.",
+    "Discipline sustains long-term momentum."
+  ]
+}

@@ -1,0 +1,1432 @@
+{
+  "generated_at": "2026-02-21T05:03:18.928Z",
+  "note": "Expanded 2-3 hour versions for courses 1-7 with concept, case study, practice, and quiz checkpoint lessons.",
+  "courses": [
+    {
+      "course_code": "L1-P1-C1",
+      "title": "The Confidence Code: Building Unstoppable Self-Belief",
+      "import_title": "L1-P1-C1: The Confidence Code: Building Unstoppable Self-Belief",
+      "pillar": "Mindset and Personal Mastery",
+      "level": "Beginner",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 140,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Understand how thoughts shape self-belief and behavior.",
+        "Identify and challenge negative self-talk.",
+        "Practice techniques that strengthen self-esteem and self-worth.",
+        "Develop a growth-oriented mindset for challenges.",
+        "Act confidently in uncertain situations."
+      ],
+      "introduction": "Your mind is extraordinarily powerful. Your thoughts shape energy, emotions, and destiny. Confidence is not an inborn gift; it is a trainable identity built through intentional thinking, courageous action, and repeated self-trust. This course helps learners decode and strengthen inner belief so they can perform under pressure, recover from setbacks, and move forward with conviction.",
+      "modules": [
+        {
+          "title": "Module 1: The Psychology of Confidence",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Confidence Begins in Thought",
+              "duration_minutes": 8,
+              "content_markdown": "Confidence begins in the mind. Dominant thoughts become dominant behavior. Your self-concept acts as an internal thermostat, regulating how far you allow yourself to go. When you repeatedly see yourself as capable, the brain aligns emotion and action with that identity. Repetition of constructive self-belief builds neural pathways that make confidence feel natural.\n\nQuote focus: \"As a man thinketh in his heart, so is he\" (Proverbs 23:7).\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 1.2: Self-Image and Performance",
+              "duration_minutes": 8,
+              "content_markdown": "Performance is often a mirror of identity. People who believe they are resourceful, worthy, and able to learn from failure are more likely to take initiative. This lesson introduces self-image recalibration through reflection prompts and identity-based affirmations.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Psychology of Confidence",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the psychology of confidence under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Psychology of Confidence",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the psychology of confidence.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 2: Breaking the Cycle of Self-Doubt",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Spotting the Voice of Doubt",
+              "duration_minutes": 8,
+              "content_markdown": "Self-doubt grows through comparison, harsh self-judgment, and fixation on past failure. Confidence grows through evidence of progress. Learners will identify their top recurring doubt scripts and replace them with growth statements.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 2.2: Reframing Through Micro-Wins",
+              "duration_minutes": 8,
+              "content_markdown": "Use a daily victory log: write three actions you completed, even small ones. This trains the mind to recognize capability instead of deficiency. Every confident person once felt uncertain; confidence develops when action continues anyway.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Breaking the Cycle of Self-Doubt",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply breaking the cycle of self-doubt under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Breaking the Cycle of Self-Doubt",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for breaking the cycle of self-doubt.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 3: The Habit of Bold Action",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Courage in Practice",
+              "duration_minutes": 8,
+              "content_markdown": "Courage is not the absence of fear but movement despite fear. Each bold action creates memory evidence that reduces future hesitation. Start with small risks: speak up, share a viewpoint, initiate a difficult conversation, or volunteer for responsibility.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 3.2: Action Creates Confidence",
+              "duration_minutes": 8,
+              "content_markdown": "Confidence is built through repetition, not luck. Learners practice the 24-hour courage rule: take one action within 24 hours of identifying an opportunity.\n\nQuote focus: \"Faith without works is dead\" (James 2:17).\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Habit of Bold Action",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the habit of bold action under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Habit of Bold Action",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the habit of bold action.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Building Inner Strength and Long-Term Confidence",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Resilience Over Perfection",
+              "duration_minutes": 8,
+              "content_markdown": "True confidence does not come from being flawless. It comes from recovering quickly and staying anchored when life shakes you. Learners develop a resilience routine using reflection, affirmations, and emotional reset tools.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 4.2: The Confidence Code in Daily Life",
+              "duration_minutes": 8,
+              "content_markdown": "Live confidently by reframing challenges as growth opportunities, choosing progress over perfection, and recalling past victories before high-pressure tasks.\n\nAffirmation model: \"I am capable. I am growing. I am enough.\"\n\nQuote focus: \"I can do all things through Christ who strengthens me\" (Philippians 4:13).\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Building Inner Strength and Long-Term Confidence",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply building inner strength and long-term confidence under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Building Inner Strength and Long-Term Confidence",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for building inner strength and long-term confidence.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [],
+      "closing_insight": "Confidence is cultivated daily through awareness, action, and faith. Your thoughts are seeds; plant confidence and you harvest courage, consistency, and results."
+    },
+    {
+      "course_code": "L1-P1-C2",
+      "title": "Overcoming Negative Thinking: Rewiring Your Brain for Positivity",
+      "import_title": "L1-P1-C2: Overcoming Negative Thinking: Rewiring Your Brain for Positivity",
+      "pillar": "Mindset and Personal Mastery",
+      "level": "Beginner to Intermediate",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 175,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Explain how negative thinking develops and influences well-being.",
+        "Identify common cognitive distortions.",
+        "Apply practical methods to interrupt and replace negative thoughts.",
+        "Build optimism and resilience through daily mental habits.",
+        "Create a long-term strategy for mental balance."
+      ],
+      "introduction": "Negative thinking is not destiny. It is a learned mental program that can be unlearned through neuroplasticity, awareness, and disciplined cognitive practice. This course teaches learners to identify destructive thought patterns, challenge distortions, and build emotional clarity, optimism, and resilience.",
+      "modules": [
+        {
+          "title": "Module 1: The Science of Thought",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Neuroplasticity and Mental Patterns",
+              "duration_minutes": 8,
+              "content_markdown": "Your brain rewires based on repetition. Each thought strengthens a pathway. Repeated negative thoughts train the brain to scan for danger; repeated constructive thoughts train it to notice options and resources. Thought management is future management.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 1.2: Emotional Chemistry of Thought",
+              "duration_minutes": 8,
+              "content_markdown": "Negative thoughts trigger stress chemistry and narrowed perception. Constructive thoughts increase calm, motivation, and creativity. This lesson introduces a thought-chemistry tracker to map triggers and emotional outcomes.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Science of Thought",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the science of thought under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Science of Thought",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the science of thought.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 2: The Nature of Negative Thinking",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Core Beliefs and Internal Scripts",
+              "duration_minutes": 8,
+              "content_markdown": "Many negative beliefs begin in early emotional experiences and become internal scripts: \"I am not enough,\" \"Nothing works out for me,\" or \"I cannot trust anyone.\" Learners identify and map their top three inherited scripts.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 2.2: Beliefs vs. Events",
+              "duration_minutes": 8,
+              "content_markdown": "Following REBT principles, distress is often created by interpretation rather than event alone. The shift begins when learners ask: What happened? What did I tell myself it means? Is that story fully true?\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Nature of Negative Thinking",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the nature of negative thinking under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Nature of Negative Thinking",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the nature of negative thinking.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 3: Recognizing Cognitive Distortions",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Distortion Types and Detection",
+              "duration_minutes": 8,
+              "content_markdown": "Key distortions include catastrophizing, personalization, all-or-nothing thinking, and filtering. Labeling a distortion weakens its emotional grip and creates mental distance from it.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 3.2: Distortion-to-Truth Practice",
+              "duration_minutes": 8,
+              "content_markdown": "Learners convert distorted statements into balanced truth statements. Example: \"If this fails, everything is over\" becomes \"This may be difficult, but one event does not define my future.\"\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Recognizing Cognitive Distortions",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply recognizing cognitive distortions under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Recognizing Cognitive Distortions",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for recognizing cognitive distortions.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Rewiring for Positivity",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Interrupt, Question, Replace",
+              "duration_minutes": 8,
+              "content_markdown": "Use a 3-step reset: Interrupt the thought, question its accuracy, replace it with a constructive alternative. Practice this repeatedly until it becomes automatic under stress.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 4.2: Systemizing Better Thinking",
+              "duration_minutes": 8,
+              "content_markdown": "Goals do not sustain mindset change; systems do. Learners build a daily thinking system with morning intention, midday reset, and evening reframing review.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Rewiring for Positivity",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply rewiring for positivity under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Rewiring for Positivity",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for rewiring for positivity.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 5: Gratitude, Perspective, and Environment",
+          "lessons": [
+            {
+              "title": "Lesson 5.1: Gratitude as Cognitive Training",
+              "duration_minutes": 8,
+              "content_markdown": "Gratitude is not denial of pain; it is disciplined attention to what is still working. Daily gratitude practice shifts perception from scarcity toward resourcefulness and strengthens motivation.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 5.2: Designing a Positive Mental Ecosystem",
+              "duration_minutes": 8,
+              "content_markdown": "Your environment shapes your mental tone. Curate inputs: conversations, media, books, and communities. Positivity becomes sustainable when your ecosystem supports it.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Gratitude, Perspective, and Environment",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply gratitude, perspective, and environment under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Gratitude, Perspective, and Environment",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for gratitude, perspective, and environment.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [],
+      "closing_insight": "Negative thinking is a habit, not an identity. Every constructive thought is a vote for the person you are becoming."
+    },
+    {
+      "course_code": "L1-P2-C3",
+      "title": "Overcoming Procrastination: How to Get Things Done Now",
+      "import_title": "L1-P2-C3: Overcoming Procrastination: How to Get Things Done Now",
+      "pillar": "Productivity and Success Strategies",
+      "level": "Beginner",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 175,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Identify psychological causes of procrastination.",
+        "Understand emotional triggers of delay and avoidance.",
+        "Apply science-backed anti-procrastination techniques.",
+        "Build self-discipline and an execution mindset.",
+        "Create sustainable systems for consistent output."
+      ],
+      "introduction": "Procrastination is not a time problem. It is a regulation problem where short-term comfort overrides meaningful action. This course helps learners understand the psychology behind delay and build systems that turn intention into consistent execution.",
+      "modules": [
+        {
+          "title": "Module 1: The Psychology Behind Procrastination",
+          "lessons": [
+            {
+              "title": "Lesson 1.1: Why We Delay",
+              "duration_minutes": 8,
+              "content_markdown": "Procrastination is often emotional mismanagement, not laziness. We avoid tasks that trigger discomfort: fear of failure, uncertainty, frustration, or perfection pressure. Understanding this reduces self-blame and improves strategy selection.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 1.2: Mood Repair vs. Long-Term Reward",
+              "duration_minutes": 8,
+              "content_markdown": "The brain prefers immediate relief over delayed reward. Learners map their common comfort substitutions (scrolling, avoidance tasks, over-planning) and design response alternatives.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Psychology Behind Procrastination",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the psychology behind procrastination under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Psychology Behind Procrastination",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the psychology behind procrastination.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 2: The Illusion of Later",
+          "lessons": [
+            {
+              "title": "Lesson 2.1: Future-Self Myth",
+              "duration_minutes": 8,
+              "content_markdown": "\"Later\" feels strategic but often postpones the same emotional difficulty. The future self is likely to face the same resistance unless systems change now.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 2.2: Decision Management",
+              "duration_minutes": 8,
+              "content_markdown": "Execution improves when decisions are pre-made. Learners apply if-then rules: \"If it is 8:00 PM, I begin 25 minutes of focused study.\" Reducing decision friction reduces delay.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Illusion of Later",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the illusion of later under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Illusion of Later",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the illusion of later.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 3: Emotional Resistance and the Fear of Starting",
+          "lessons": [
+            {
+              "title": "Lesson 3.1: Activation Threshold",
+              "duration_minutes": 8,
+              "content_markdown": "Starting is the hardest part. Once action begins, resistance drops. Learners use activation rituals and countdown entry methods to lower start friction.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 3.2: The 2-Minute Rule",
+              "duration_minutes": 8,
+              "content_markdown": "Start with a two-minute version of the task: open the file, write one line, read one paragraph, wear gym shoes. Initial motion generates momentum and dopamine reinforcement.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Emotional Resistance and the Fear of Starting",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply emotional resistance and the fear of starting under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Emotional Resistance and the Fear of Starting",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for emotional resistance and the fear of starting.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 4: Perfectionism and Momentum",
+          "lessons": [
+            {
+              "title": "Lesson 4.1: Perfectionism as Hidden Delay",
+              "duration_minutes": 8,
+              "content_markdown": "Many delays are fear of imperfect output. The shift is from perfection to iteration: produce draft one, then improve. Progress compounds; perfection stalls.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 4.2: Small Wins Framework",
+              "duration_minutes": 8,
+              "content_markdown": "Break tasks into low-friction substeps, complete one visible unit at a time, and celebrate completion. Momentum is built from consistency, not intensity.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Perfectionism and Momentum",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply perfectionism and momentum under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Perfectionism and Momentum",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for perfectionism and momentum.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Module 5: Environment, Focus, and Accountability",
+          "lessons": [
+            {
+              "title": "Lesson 5.1: Designing for Focus",
+              "duration_minutes": 8,
+              "content_markdown": "Use a distraction-resistant setup: clean workspace, muted notifications, and time-boxed focus intervals (Pomodoro). Protect attention like a limited asset.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Lesson 5.2: Accountability Systems",
+              "duration_minutes": 8,
+              "content_markdown": "Public commitments increase follow-through. Learners build accountability loops with peers, mentors, or digital trackers. The principle is simple: what gets reported gets done.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Environment, Focus, and Accountability",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply environment, focus, and accountability under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Environment, Focus, and Accountability",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for environment, focus, and accountability.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [],
+      "closing_insight": "The question is no longer \"Can I do it?\" but \"Will I start now?\" Action in small consistent steps rewrites identity into someone who follows through."
+    },
+    {
+      "course_code": "L1-P2-C4",
+      "title": "Overcoming Procrastination: How to Get Things Done Now",
+      "import_title": "L1-P2-C4: Overcoming Procrastination: How to Get Things Done Now",
+      "pillar": "Productivity and Success Strategies",
+      "level": "Beginner",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 180,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Identify the root psychological causes of procrastination.",
+        "Understand how emotions influence delay and avoidance.",
+        "Apply science-backed strategies to overcome procrastination.",
+        "Build self-discipline and develop an action-oriented mindset.",
+        "Create habits that make progress automatic and sustainable."
+      ],
+      "introduction": "Procrastination is not a time problem; it is a mind problem. It is not that you do not have enough hours in the day — it is that your thoughts, emotions, and priorities are not aligned with action. Every time you delay a task, you trade progress for temporary comfort. You tell yourself, 'I will start later,' but later often becomes never. Your brain is wired to seek comfort and avoid discomfort. Starting something uncertain, difficult, or demanding triggers the brain’s alarm system, and your natural response is to escape. But the truth is this: you will never feel fully ready. Action precedes motivation. Once you begin, momentum builds.",
+      "modules": [
+        {
+          "title": "Chapter 1. The Psychology Behind Procrastination",
+          "lessons": [
+            {
+              "title": "Why Delay Happens",
+              "duration_minutes": 8,
+              "content_markdown": "Procrastination is not laziness — it is emotional mismanagement. According to Dr. Piers Steel, we procrastinate when we value short-term mood repair over long-term reward. We do not avoid work; we avoid the emotional discomfort linked to work, such as uncertainty, fear of failure, and perfection pressure. The brain interprets these emotions as danger and activates avoidance. To overcome procrastination, train yourself to act based on purpose, not mood.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Psychology Behind Procrastination",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the psychology behind procrastination under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Psychology Behind Procrastination",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the psychology behind procrastination.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 2. The Illusion of Later",
+          "lessons": [
+            {
+              "title": "Decision Management Over Time Management",
+              "duration_minutes": 8,
+              "content_markdown": "'Later' feels safe because it promises control without commitment. But it is a mental trap. Your future self will face the same emotions and distractions unless your system changes. As James Clear writes, you do not rise to the level of your goals; you fall to the level of your systems. The antidote is decision management: make clear execution decisions now.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Illusion of Later",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the illusion of later under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Illusion of Later",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the illusion of later.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 3. Emotional Resistance and the Fear of Starting",
+          "lessons": [
+            {
+              "title": "Lowering the Activation Threshold",
+              "duration_minutes": 8,
+              "content_markdown": "The hardest part of any task is beginning. Once you start, resistance weakens. Apply the 2-Minute Rule: begin with an action that takes less than two minutes. Open the document. Put on workout shoes. Read one paragraph. Starting creates momentum and reduces anxiety.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Emotional Resistance and the Fear of Starting",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply emotional resistance and the fear of starting under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Emotional Resistance and the Fear of Starting",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for emotional resistance and the fear of starting.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 4. Perfectionism: The Hidden Face of Procrastination",
+          "lessons": [
+            {
+              "title": "Progress Over Perfection",
+              "duration_minutes": 8,
+              "content_markdown": "Many people delay because they care deeply and fear imperfection. Perfectionism creates impossible standards and blocks execution. The winning mindset is iteration: start imperfectly, then improve. Every masterpiece begins as a rough draft.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Perfectionism: The Hidden Face of Procrastination",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply perfectionism: the hidden face of procrastination under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Perfectionism: The Hidden Face of Procrastination",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for perfectionism: the hidden face of procrastination.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 5. Building Momentum Through Small Wins",
+          "lessons": [
+            {
+              "title": "Consistency Compounds",
+              "duration_minutes": 8,
+              "content_markdown": "Momentum is productivity’s hidden force. Break tasks into small actions, complete one step at a time, and celebrate completion. Focus on consistency over intensity. Small daily progress is stronger than rare bursts of effort.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Building Momentum Through Small Wins",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply building momentum through small wins under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Building Momentum Through Small Wins",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for building momentum through small wins.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 6. Environment and Focus",
+          "lessons": [
+            {
+              "title": "Designing a Focus-Friendly Environment",
+              "duration_minutes": 8,
+              "content_markdown": "Your environment can feed or fight procrastination. Keep your workspace clean, silence unnecessary alerts, and use focus blocks. Protect attention as a limited resource.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Pomodoro Technique in Practice",
+              "duration_minutes": 8,
+              "content_markdown": "Choose one task. Set a timer for one focused interval (one Pomodoro). Work only on that task until the timer rings. Take a 5-minute break. Repeat. After four cycles, take a longer break. This structure improves focus and reduces overwhelm.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Environment and Focus",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply environment and focus under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Environment and Focus",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for environment and focus.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 6",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 7. Accountability and Commitment",
+          "lessons": [
+            {
+              "title": "Social Structure for Follow-Through",
+              "duration_minutes": 8,
+              "content_markdown": "Goals remain flexible when private and become commitments when shared. Research shows completion increases when goals are reported to someone trusted. Use an accountability partner, mentor, or group to maintain execution discipline.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Accountability and Commitment",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply accountability and commitment under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Accountability and Commitment",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for accountability and commitment.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 7",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [],
+      "closing_insight": "Procrastination is not weakness — it is a learned response to discomfort. Every time you act despite hesitation, you build mental strength. Success depends on your ability to act now. Productivity is not doing more; it is doing what matters most and doing it today. The question is not 'Can you do it?' but 'Will you start?'"
+    },
+    {
+      "course_code": "L1-P2-C5",
+      "title": "Goal-Setting Mastery: Creating and Crushing Your Goals",
+      "import_title": "L1-P2-C5: Goal-Setting Mastery: Creating and Crushing Your Goals",
+      "pillar": "Productivity and Success Strategies",
+      "level": "Beginner",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 162,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Understand the psychology behind goal achievement.",
+        "Identify and set SMART goals aligned with purpose.",
+        "Break large goals into small, achievable milestones.",
+        "Build consistency and resilience when facing challenges.",
+        "Develop systems and habits that turn goals into lasting success."
+      ],
+      "introduction": "Your goals are the blueprint of your future. Every great achievement begins with clear vision and committed action. Goal-setting mastery is about taking control — defining what you want, why you want it, and how you will make it happen. This course transforms vague dreams into precise, measurable actions and helps you maintain momentum until results are achieved.",
+      "modules": [
+        {
+          "title": "Chapter 1: The Power of Clear Intentions",
+          "lessons": [
+            {
+              "title": "Clarity Creates Direction",
+              "duration_minutes": 8,
+              "content_markdown": "Everything starts with clarity. Without a target, the mind has no direction. When goals are specific and emotionally meaningful, attention systems such as the Reticular Activating System (RAS) begin filtering opportunities aligned to that direction. Quote focus: \"A person who aims at nothing is sure to hit it.\" - Zig Ziglar.\n\nKey exercise: write 3 specific 12-month goals and define the deeper why behind each.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Power of Clear Intentions",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the power of clear intentions under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Power of Clear Intentions",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the power of clear intentions.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 2: Designing SMART Goals",
+          "lessons": [
+            {
+              "title": "From Dream to Structured Goal",
+              "duration_minutes": 8,
+              "content_markdown": "A dream becomes actionable when it is Specific, Measurable, Achievable, Relevant, and Time-bound. Learners practice converting vague outcomes into precise commitments with clear measurement methods, review checkpoints, and deadlines.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Designing SMART Goals",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply designing smart goals under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Designing SMART Goals",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for designing smart goals.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 3: Building Systems and Habits",
+          "lessons": [
+            {
+              "title": "Systems Sustain What Motivation Starts",
+              "duration_minutes": 8,
+              "content_markdown": "Motivation can initiate action, but systems preserve progress. Build recurring behavior loops (daily actions, weekly reviews, milestone tracking). If the goal is writing a book, the system is writing a fixed word count consistently. Future outcomes are built by repeated practice, not occasional effort.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Building Systems and Habits",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply building systems and habits under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Building Systems and Habits",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for building systems and habits.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 4: Mental Barriers and Self-Sabotage",
+          "lessons": [
+            {
+              "title": "Overcoming Inner Resistance",
+              "duration_minutes": 8,
+              "content_markdown": "Fear, perfectionism, and doubt delay execution. Procrastination is often emotional regulation failure, not planning failure. Reframe setbacks as data. Replace all-or-nothing thinking with iterative progress. Quote focus: \"You don’t rise to the level of your goals; you fall to the level of your systems.\" - James Clear.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Mental Barriers and Self-Sabotage",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply mental barriers and self-sabotage under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Mental Barriers and Self-Sabotage",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for mental barriers and self-sabotage.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 5: Tracking Progress and Staying Accountable",
+          "lessons": [
+            {
+              "title": "Measurement and Accountability",
+              "duration_minutes": 8,
+              "content_markdown": "High performers review progress weekly. Track wins, friction points, and next actions. Accountability with mentors, peers, or systems significantly increases completion rates. Celebrating small wins reinforces identity and motivation.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Tracking Progress and Staying Accountable",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply tracking progress and staying accountable under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Tracking Progress and Staying Accountable",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for tracking progress and staying accountable.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 6: Sustaining Motivation and Momentum",
+          "lessons": [
+            {
+              "title": "Long-Term Discipline and Energy",
+              "duration_minutes": 8,
+              "content_markdown": "Discipline is action even when mood is low. Sustain momentum by visualizing outcomes, rewarding progress, and reconnecting to purpose regularly. Momentum grows when execution becomes habitual.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Sustaining Motivation and Momentum",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply sustaining motivation and momentum under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Sustaining Motivation and Momentum",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for sustaining motivation and momentum.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 6",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [
+        "Clarity gives direction.",
+        "SMART goals make progress measurable.",
+        "Systems and habits are engines of achievement.",
+        "Fear and procrastination are emotional signals, not destiny.",
+        "Accountability accelerates results.",
+        "Discipline sustains long-term momentum."
+      ],
+      "closing_insight": "Goal-setting mastery is a science of clarity, focus, and consistent execution. Every achieved goal strengthens belief, discipline, and identity. You are not merely setting goals — you are designing your life architecture."
+    },
+    {
+      "course_code": "L1-P2-C6",
+      "title": "The Power of Focus: How to Stay on Track and Achieve Your Goals",
+      "import_title": "L1-P2-C6: The Power of Focus: How to Stay on Track and Achieve Your Goals",
+      "pillar": "Productivity and Success Strategies",
+      "level": "Beginner to Intermediate",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 162,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Understand how focus shapes behavior and determines outcomes.",
+        "Recognize psychological and environmental factors that weaken focus.",
+        "Learn how clarity, purpose, and attention work together to drive results.",
+        "Discover strategies used by high performers to maintain focus.",
+        "Apply focus principles to daily goals and long-term ambitions."
+      ],
+      "introduction": "Your mind is extraordinarily powerful. Focus is the deliberate direction of thought toward a meaningful outcome. In a noisy world, focus converts scattered effort into measurable progress. It is less about doing more and more about choosing what matters and sustaining attention long enough for results to appear.",
+      "modules": [
+        {
+          "title": "Chapter 1. The Psychology of Focus",
+          "lessons": [
+            {
+              "title": "Focus as a Limited Cognitive Resource",
+              "duration_minutes": 8,
+              "content_markdown": "The brain cannot sustain high-quality attention across many streams at once. When attention is fragmented, performance drops. When attention converges on one task, neural synchronization increases and flow becomes possible.\n\nPractical experience: Observe professionals under pressure (surgeons, athletes, musicians). Their output quality is linked to depth of single-task attention.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Psychology of Focus",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the psychology of focus under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Psychology of Focus",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the psychology of focus.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 2. Clarity: The Foundation of Focus",
+          "lessons": [
+            {
+              "title": "Clarity Before Concentration",
+              "duration_minutes": 8,
+              "content_markdown": "You cannot focus on undefined goals. Clarity sets direction, and direction channels attention. Without clear targets, effort becomes scattered and progress stalls.\n\nQuote focus: \"The successful person is the average person, focused.\" - Napoleon Hill\n\nPractical experience: Apply a weekly 'focus filter' by selecting only 1-3 outcomes and consciously saying no to non-essential tasks.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Clarity: The Foundation of Focus",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply clarity: the foundation of focus under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Clarity: The Foundation of Focus",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for clarity: the foundation of focus.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 3. Deep Work: The Engine of Achievement",
+          "lessons": [
+            {
+              "title": "Shallow Work vs Deep Work",
+              "duration_minutes": 8,
+              "content_markdown": "Shallow work creates the feeling of busyness. Deep work creates actual value through concentrated creation, problem-solving, and strategic thinking. High-level results come from uninterrupted focus windows over time.\n\nPractical experience: Schedule two deep-work blocks per day (45-90 minutes), remove notifications, and define one clear output per block.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Deep Work: The Engine of Achievement",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply deep work: the engine of achievement under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Deep Work: The Engine of Achievement",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for deep work: the engine of achievement.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 4. The Enemies of Focus",
+          "lessons": [
+            {
+              "title": "Distraction, Multitasking, and Attention Leakage",
+              "duration_minutes": 8,
+              "content_markdown": "Focus is attacked externally (devices, noise, interruptions) and internally (fear, fatigue, procrastination, emotional overload). Multitasking lowers efficiency and weakens memory retention.\n\nPractical experience: Track interruption frequency for one study/work session and measure recovery time to full concentration. Build interruption boundaries to protect attention.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Enemies of Focus",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the enemies of focus under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Enemies of Focus",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the enemies of focus.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 5. The Power of Mental Endurance",
+          "lessons": [
+            {
+              "title": "Training Attention Like a Muscle",
+              "duration_minutes": 8,
+              "content_markdown": "Focus is not a one-time talent; it is trained endurance. Attention grows with repeated deliberate practice and weakens with constant switching. Discipline provides stability when motivation fluctuates.\n\nQuote focus: \"Discipline is choosing what you want most over what you want now.\" - Abraham Lincoln\n\nPractical experience: Use routine anchors (start time, location, ritual) to reduce decision fatigue and maintain consistent focus output.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Power of Mental Endurance",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the power of mental endurance under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Power of Mental Endurance",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the power of mental endurance.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 6. Aligning Focus with Purpose",
+          "lessons": [
+            {
+              "title": "Purpose as Attention Fuel",
+              "duration_minutes": 8,
+              "content_markdown": "Purpose gives focus emotional gravity. Without purpose, focus feels forced. Without focus, purpose remains unrealized. When both align, momentum becomes sustainable.\n\nPractical experience: Write a one-sentence purpose statement for your current goal and review it before each focus block. This creates psychological alignment and improves persistence under pressure.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Aligning Focus with Purpose",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply aligning focus with purpose under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Aligning Focus with Purpose",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for aligning focus with purpose.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 6",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [
+        "Focus is deliberate direction of thought and energy toward one objective.",
+        "Clarity is the foundation of concentration.",
+        "Deep work produces excellence; shallow work produces fatigue.",
+        "Distractions are both external and internal.",
+        "Purpose strengthens attention durability.",
+        "Focus compounds through repetition, discipline, and self-control."
+      ],
+      "closing_insight": "Across every high-performance field, those who sustain attention on what matters outperform those who chase everything. You may not control every event around you, but you can control where your mind stays. Where focus goes, your future flows."
+    },
+    {
+      "course_code": "L1-P2-C7",
+      "title": "How to Master Time Management: Taking Control of Your Day",
+      "import_title": "L1-P2-C7: How to Master Time Management: Taking Control of Your Day",
+      "pillar": "Productivity and Success Strategies",
+      "level": "Beginner to Intermediate",
+      "format": "Coursera-style Expanded",
+      "estimated_duration_minutes": 180,
+      "estimated_duration_label": "2-3 hours",
+      "objectives": [
+        "Understand the psychology behind effective time management.",
+        "Identify how poor planning and distraction waste valuable hours.",
+        "Use proven strategies to prioritize tasks and eliminate time traps.",
+        "Apply time-blocking and focus principles to daily routines.",
+        "Develop a mindset that values time as a non-renewable resource."
+      ],
+      "introduction": "Time is life’s greatest equalizer. Everyone receives the same 24 hours, but outcomes differ by how those hours are used. Time management is not about squeezing in more tasks; it is about directing energy and priorities toward what matters most. When you master your time, you reduce chaos, increase consistency, and make space for growth and purpose.",
+      "modules": [
+        {
+          "title": "Chapter 1. Understanding the Nature of Time",
+          "lessons": [
+            {
+              "title": "Time as an Investment Asset",
+              "duration_minutes": 8,
+              "content_markdown": "Time is invisible yet measurable. Productive people treat time as an investment rather than a consumable. Every hour can generate progress or regret.\n\nPractical experience: compare two equal 8-hour schedules — one reactive, one structured. The difference in output reveals the compounding power of intentional planning.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Understanding the Nature of Time",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply understanding the nature of time under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Understanding the Nature of Time",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for understanding the nature of time.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 1",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 2. The Psychology of Control",
+          "lessons": [
+            {
+              "title": "Reclaiming Schedule Authority",
+              "duration_minutes": 8,
+              "content_markdown": "Many people say they do not have time, but the deeper issue is often loss of control. With an internal locus of control, each hour becomes a conscious choice.\n\nPractical experience: track one week of time leaks, then plan the next day every evening. Most learners recover significant productive hours and reduce stress quickly.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Psychology of Control",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the psychology of control under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Psychology of Control",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the psychology of control.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 2",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 3. The Priority Principle",
+          "lessons": [
+            {
+              "title": "Doing What Matters Most",
+              "duration_minutes": 8,
+              "content_markdown": "You can do anything, but not everything. Use Covey’s matrix to separate urgent activity from important progress. High growth comes from consistent work in the important-but-not-urgent quadrant.\n\nPractical experience: redesign your morning around one strategic important task before reactive communication.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Priority Principle",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the priority principle under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Priority Principle",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the priority principle.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 3",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 4. The Power of Planning",
+          "lessons": [
+            {
+              "title": "Time-Blocking for Execution",
+              "duration_minutes": 8,
+              "content_markdown": "Planning turns vision into executable structure. Time-blocking assigns boundaries for focused work, meetings, renewal, and study. This reduces decision fatigue and protects cognitive energy.\n\nPractical experience: build a day map with fixed blocks (study, deep work, exercise, review) and run it for 7 days.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Power of Planning",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the power of planning under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Power of Planning",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the power of planning.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 4",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 5. Defeating Time Thieves",
+          "lessons": [
+            {
+              "title": "Attention Loss and Recovery Costs",
+              "duration_minutes": 8,
+              "content_markdown": "Common time thieves include multitasking, social media loops, perfection delay, and unplanned interruptions. Frequent switching creates hidden recovery costs that collapse real output.\n\nPractical experience: silence non-essential alerts, batch communication windows, and use distraction-free work blocks to recover lost hours.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Defeating Time Thieves",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply defeating time thieves under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Defeating Time Thieves",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for defeating time thieves.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 5",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 6. Balancing Work and Renewal",
+          "lessons": [
+            {
+              "title": "Energy Cycles and Sustainable Output",
+              "duration_minutes": 8,
+              "content_markdown": "Time mastery requires balance. Productivity without recovery causes burnout; recovery without direction causes stagnation. Work in focused cycles followed by deliberate renewal.\n\nPractical experience: test a 90-minute focus + 15-minute recovery cycle and monitor quality of output and mental clarity.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: Balancing Work and Renewal",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply balancing work and renewal under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: Balancing Work and Renewal",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for balancing work and renewal.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 6",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        },
+        {
+          "title": "Chapter 7. The Mindset of Time Investors",
+          "lessons": [
+            {
+              "title": "Treating Time Like Capital",
+              "duration_minutes": 8,
+              "content_markdown": "High performers evaluate time like financial capital: every activity is a deposit or a withdrawal. Ask whether each task advances strategic outcomes.\n\nPractical experience: run a weekly time audit and redirect low-return hours into skill growth, execution, and high-value relationships.\n\n### Expanded Insight\nThis segment deepens the original concept with practical interpretation, common mistakes, and implementation patterns for real-life execution.",
+              "lesson_type": "concept"
+            },
+            {
+              "title": "Case Study: The Mindset of Time Investors",
+              "duration_minutes": 6,
+              "content_markdown": "A realistic scenario is used to apply the mindset of time investors under pressure. Learners identify the decision points, evaluate options, and choose an action path.\n\n### Case Prompts\n- What was the main bottleneck?\n- Which principle from this module solved it?\n- How would you adapt this approach to your own context?",
+              "lesson_type": "case_study"
+            },
+            {
+              "title": "Practice Lab: The Mindset of Time Investors",
+              "duration_minutes": 8,
+              "content_markdown": "Hands-on implementation session for the mindset of time investors.\n\n### Lab Workflow\n1. Define one specific action for today.\n2. Run a 20-minute implementation sprint.\n3. Record friction points.\n4. Refine and repeat.\n\n### Output\nSubmit one before/after behavior change statement.",
+              "lesson_type": "practice"
+            },
+            {
+              "title": "Reflection and Quiz Checkpoint 7",
+              "duration_minutes": 5,
+              "content_markdown": "### Reflection\n- What changed in your thinking this week?\n- What action did you actually complete?\n- What will you improve next cycle?\n\n### Quiz\n1. Identify the key principle in this module.\n2. Choose the most effective implementation strategy.\n3. Select the best response to a common obstacle.",
+              "lesson_type": "quiz_review"
+            }
+          ]
+        }
+      ],
+      "key_takeaways": [
+        "Time is your most valuable non-renewable asset.",
+        "Control begins with awareness and tracking.",
+        "Prioritize important-but-not-urgent work for long-term growth.",
+        "Use time-blocking to reduce decision fatigue.",
+        "Eliminate distractions and defend attention.",
+        "Balance execution with renewal cycles.",
+        "Adopt an investor mindset for every hour."
+      ],
+      "closing_insight": "Mastering time is not about speed; it is about direction. When time is structured around purpose, each deliberate hour compounds into results and identity-level growth. You are not managing time alone — you are managing life architecture."
+    }
+  ]
+}

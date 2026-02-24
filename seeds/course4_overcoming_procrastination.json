@@ -1,0 +1,88 @@
+{
+  "course_code": "L1-P2-C4",
+  "title": "Overcoming Procrastination: How to Get Things Done Now",
+  "pillar": "Productivity and Success Strategies",
+  "level": "Beginner",
+  "duration": "5 weeks",
+  "format": "Coursera-style",
+  "preface": "This course, Overcoming Procrastination: How to Get Things Done Now, was created to help you break free from delay, distraction, and hesitation. Procrastination is not a flaw — it is a habit that can be rewired with awareness, discipline, and the right strategies. Inside these pages, you will find practical tools, insights, and exercises designed to help you take action immediately, overcome mental blocks, and develop habits that turn intention into achievement. This is not just about working harder — it is about working smarter and consistently. By following this course, you will learn that the most powerful step toward success is often simply to start.",
+  "dedication": "To every person who has ever delayed their work, this course is for you. May these lessons inspire action, build momentum, and remind you that progress is created one step at a time — today, now.",
+  "objectives": [
+    "Identify the root psychological causes of procrastination.",
+    "Understand how emotions influence delay and avoidance.",
+    "Apply science-backed strategies to overcome procrastination.",
+    "Build self-discipline and develop an action-oriented mindset.",
+    "Create habits that make progress automatic and sustainable."
+  ],
+  "introduction": "Procrastination is not a time problem; it is a mind problem. It is not that you do not have enough hours in the day — it is that your thoughts, emotions, and priorities are not aligned with action. Every time you delay a task, you trade progress for temporary comfort. You tell yourself, 'I will start later,' but later often becomes never. Your brain is wired to seek comfort and avoid discomfort. Starting something uncertain, difficult, or demanding triggers the brain’s alarm system, and your natural response is to escape. But the truth is this: you will never feel fully ready. Action precedes motivation. Once you begin, momentum builds.",
+  "modules": [
+    {
+      "title": "Chapter 1. The Psychology Behind Procrastination",
+      "lessons": [
+        {
+          "title": "Why Delay Happens",
+          "content_markdown": "Procrastination is not laziness — it is emotional mismanagement. According to Dr. Piers Steel, we procrastinate when we value short-term mood repair over long-term reward. We do not avoid work; we avoid the emotional discomfort linked to work, such as uncertainty, fear of failure, and perfection pressure. The brain interprets these emotions as danger and activates avoidance. To overcome procrastination, train yourself to act based on purpose, not mood."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 2. The Illusion of Later",
+      "lessons": [
+        {
+          "title": "Decision Management Over Time Management",
+          "content_markdown": "'Later' feels safe because it promises control without commitment. But it is a mental trap. Your future self will face the same emotions and distractions unless your system changes. As James Clear writes, you do not rise to the level of your goals; you fall to the level of your systems. The antidote is decision management: make clear execution decisions now."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 3. Emotional Resistance and the Fear of Starting",
+      "lessons": [
+        {
+          "title": "Lowering the Activation Threshold",
+          "content_markdown": "The hardest part of any task is beginning. Once you start, resistance weakens. Apply the 2-Minute Rule: begin with an action that takes less than two minutes. Open the document. Put on workout shoes. Read one paragraph. Starting creates momentum and reduces anxiety."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 4. Perfectionism: The Hidden Face of Procrastination",
+      "lessons": [
+        {
+          "title": "Progress Over Perfection",
+          "content_markdown": "Many people delay because they care deeply and fear imperfection. Perfectionism creates impossible standards and blocks execution. The winning mindset is iteration: start imperfectly, then improve. Every masterpiece begins as a rough draft."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 5. Building Momentum Through Small Wins",
+      "lessons": [
+        {
+          "title": "Consistency Compounds",
+          "content_markdown": "Momentum is productivity’s hidden force. Break tasks into small actions, complete one step at a time, and celebrate completion. Focus on consistency over intensity. Small daily progress is stronger than rare bursts of effort."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 6. Environment and Focus",
+      "lessons": [
+        {
+          "title": "Designing a Focus-Friendly Environment",
+          "content_markdown": "Your environment can feed or fight procrastination. Keep your workspace clean, silence unnecessary alerts, and use focus blocks. Protect attention as a limited resource."
+        },
+        {
+          "title": "Pomodoro Technique in Practice",
+          "content_markdown": "Choose one task. Set a timer for one focused interval (one Pomodoro). Work only on that task until the timer rings. Take a 5-minute break. Repeat. After four cycles, take a longer break. This structure improves focus and reduces overwhelm."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 7. Accountability and Commitment",
+      "lessons": [
+        {
+          "title": "Social Structure for Follow-Through",
+          "content_markdown": "Goals remain flexible when private and become commitments when shared. Research shows completion increases when goals are reported to someone trusted. Use an accountability partner, mentor, or group to maintain execution discipline."
+        }
+      ]
+    }
+  ],
+  "final_reflection": "Procrastination is not weakness — it is a learned response to discomfort. Every time you act despite hesitation, you build mental strength. Success depends on your ability to act now. Productivity is not doing more; it is doing what matters most and doing it today. The question is not 'Can you do it?' but 'Will you start?'"
+}

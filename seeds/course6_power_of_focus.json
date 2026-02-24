@@ -1,0 +1,81 @@
+{
+  "course_code": "L1-P2-C6",
+  "title": "The Power of Focus: How to Stay on Track and Achieve Your Goals",
+  "pillar": "Productivity and Success Strategies",
+  "level": "Beginner to Intermediate",
+  "duration": "6 weeks",
+  "format": "Coursera-style",
+  "objectives": [
+    "Understand how focus shapes behavior and determines outcomes.",
+    "Recognize psychological and environmental factors that weaken focus.",
+    "Learn how clarity, purpose, and attention work together to drive results.",
+    "Discover strategies used by high performers to maintain focus.",
+    "Apply focus principles to daily goals and long-term ambitions."
+  ],
+  "introduction": "Your mind is extraordinarily powerful. Focus is the deliberate direction of thought toward a meaningful outcome. In a noisy world, focus converts scattered effort into measurable progress. It is less about doing more and more about choosing what matters and sustaining attention long enough for results to appear.",
+  "modules": [
+    {
+      "title": "Chapter 1. The Psychology of Focus",
+      "lessons": [
+        {
+          "title": "Focus as a Limited Cognitive Resource",
+          "content_markdown": "The brain cannot sustain high-quality attention across many streams at once. When attention is fragmented, performance drops. When attention converges on one task, neural synchronization increases and flow becomes possible.\n\nPractical experience: Observe professionals under pressure (surgeons, athletes, musicians). Their output quality is linked to depth of single-task attention."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 2. Clarity: The Foundation of Focus",
+      "lessons": [
+        {
+          "title": "Clarity Before Concentration",
+          "content_markdown": "You cannot focus on undefined goals. Clarity sets direction, and direction channels attention. Without clear targets, effort becomes scattered and progress stalls.\n\nQuote focus: \"The successful person is the average person, focused.\" - Napoleon Hill\n\nPractical experience: Apply a weekly 'focus filter' by selecting only 1-3 outcomes and consciously saying no to non-essential tasks."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 3. Deep Work: The Engine of Achievement",
+      "lessons": [
+        {
+          "title": "Shallow Work vs Deep Work",
+          "content_markdown": "Shallow work creates the feeling of busyness. Deep work creates actual value through concentrated creation, problem-solving, and strategic thinking. High-level results come from uninterrupted focus windows over time.\n\nPractical experience: Schedule two deep-work blocks per day (45-90 minutes), remove notifications, and define one clear output per block."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 4. The Enemies of Focus",
+      "lessons": [
+        {
+          "title": "Distraction, Multitasking, and Attention Leakage",
+          "content_markdown": "Focus is attacked externally (devices, noise, interruptions) and internally (fear, fatigue, procrastination, emotional overload). Multitasking lowers efficiency and weakens memory retention.\n\nPractical experience: Track interruption frequency for one study/work session and measure recovery time to full concentration. Build interruption boundaries to protect attention."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 5. The Power of Mental Endurance",
+      "lessons": [
+        {
+          "title": "Training Attention Like a Muscle",
+          "content_markdown": "Focus is not a one-time talent; it is trained endurance. Attention grows with repeated deliberate practice and weakens with constant switching. Discipline provides stability when motivation fluctuates.\n\nQuote focus: \"Discipline is choosing what you want most over what you want now.\" - Abraham Lincoln\n\nPractical experience: Use routine anchors (start time, location, ritual) to reduce decision fatigue and maintain consistent focus output."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 6. Aligning Focus with Purpose",
+      "lessons": [
+        {
+          "title": "Purpose as Attention Fuel",
+          "content_markdown": "Purpose gives focus emotional gravity. Without purpose, focus feels forced. Without focus, purpose remains unrealized. When both align, momentum becomes sustainable.\n\nPractical experience: Write a one-sentence purpose statement for your current goal and review it before each focus block. This creates psychological alignment and improves persistence under pressure."
+        }
+      ]
+    }
+  ],
+  "key_takeaways": [
+    "Focus is deliberate direction of thought and energy toward one objective.",
+    "Clarity is the foundation of concentration.",
+    "Deep work produces excellence; shallow work produces fatigue.",
+    "Distractions are both external and internal.",
+    "Purpose strengthens attention durability.",
+    "Focus compounds through repetition, discipline, and self-control."
+  ],
+  "closing_insight": "Across every high-performance field, those who sustain attention on what matters outperform those who chase everything. You may not control every event around you, but you can control where your mind stays. Where focus goes, your future flows."
+}

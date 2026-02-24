@@ -1,0 +1,91 @@
+{
+  "course_code": "L1-P2-C7",
+  "title": "How to Master Time Management: Taking Control of Your Day",
+  "pillar": "Productivity and Success Strategies",
+  "level": "Beginner to Intermediate",
+  "duration": "7 weeks",
+  "format": "Coursera-style",
+  "objectives": [
+    "Understand the psychology behind effective time management.",
+    "Identify how poor planning and distraction waste valuable hours.",
+    "Use proven strategies to prioritize tasks and eliminate time traps.",
+    "Apply time-blocking and focus principles to daily routines.",
+    "Develop a mindset that values time as a non-renewable resource."
+  ],
+  "introduction": "Time is life’s greatest equalizer. Everyone receives the same 24 hours, but outcomes differ by how those hours are used. Time management is not about squeezing in more tasks; it is about directing energy and priorities toward what matters most. When you master your time, you reduce chaos, increase consistency, and make space for growth and purpose.",
+  "modules": [
+    {
+      "title": "Chapter 1. Understanding the Nature of Time",
+      "lessons": [
+        {
+          "title": "Time as an Investment Asset",
+          "content_markdown": "Time is invisible yet measurable. Productive people treat time as an investment rather than a consumable. Every hour can generate progress or regret.\n\nPractical experience: compare two equal 8-hour schedules — one reactive, one structured. The difference in output reveals the compounding power of intentional planning."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 2. The Psychology of Control",
+      "lessons": [
+        {
+          "title": "Reclaiming Schedule Authority",
+          "content_markdown": "Many people say they do not have time, but the deeper issue is often loss of control. With an internal locus of control, each hour becomes a conscious choice.\n\nPractical experience: track one week of time leaks, then plan the next day every evening. Most learners recover significant productive hours and reduce stress quickly."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 3. The Priority Principle",
+      "lessons": [
+        {
+          "title": "Doing What Matters Most",
+          "content_markdown": "You can do anything, but not everything. Use Covey’s matrix to separate urgent activity from important progress. High growth comes from consistent work in the important-but-not-urgent quadrant.\n\nPractical experience: redesign your morning around one strategic important task before reactive communication."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 4. The Power of Planning",
+      "lessons": [
+        {
+          "title": "Time-Blocking for Execution",
+          "content_markdown": "Planning turns vision into executable structure. Time-blocking assigns boundaries for focused work, meetings, renewal, and study. This reduces decision fatigue and protects cognitive energy.\n\nPractical experience: build a day map with fixed blocks (study, deep work, exercise, review) and run it for 7 days."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 5. Defeating Time Thieves",
+      "lessons": [
+        {
+          "title": "Attention Loss and Recovery Costs",
+          "content_markdown": "Common time thieves include multitasking, social media loops, perfection delay, and unplanned interruptions. Frequent switching creates hidden recovery costs that collapse real output.\n\nPractical experience: silence non-essential alerts, batch communication windows, and use distraction-free work blocks to recover lost hours."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 6. Balancing Work and Renewal",
+      "lessons": [
+        {
+          "title": "Energy Cycles and Sustainable Output",
+          "content_markdown": "Time mastery requires balance. Productivity without recovery causes burnout; recovery without direction causes stagnation. Work in focused cycles followed by deliberate renewal.\n\nPractical experience: test a 90-minute focus + 15-minute recovery cycle and monitor quality of output and mental clarity."
+        }
+      ]
+    },
+    {
+      "title": "Chapter 7. The Mindset of Time Investors",
+      "lessons": [
+        {
+          "title": "Treating Time Like Capital",
+          "content_markdown": "High performers evaluate time like financial capital: every activity is a deposit or a withdrawal. Ask whether each task advances strategic outcomes.\n\nPractical experience: run a weekly time audit and redirect low-return hours into skill growth, execution, and high-value relationships."
+        }
+      ]
+    }
+  ],
+  "key_takeaways": [
+    "Time is your most valuable non-renewable asset.",
+    "Control begins with awareness and tracking.",
+    "Prioritize important-but-not-urgent work for long-term growth.",
+    "Use time-blocking to reduce decision fatigue.",
+    "Eliminate distractions and defend attention.",
+    "Balance execution with renewal cycles.",
+    "Adopt an investor mindset for every hour."
+  ],
+  "closing_insight": "Mastering time is not about speed; it is about direction. When time is structured around purpose, each deliberate hour compounds into results and identity-level growth. You are not managing time alone — you are managing life architecture."
+}
