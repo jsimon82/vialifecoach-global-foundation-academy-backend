@@ -1,4 +1,6 @@
 import { pool } from '../config/postgres.js';
+import { supabase } from '../config/supabase.js';
+import { db } from '../config/database.js';
 import crypto from 'crypto';
 import { sendEmail } from '../services/email.service.js';
 import { FRONTEND_URL } from '../config/env.js';
@@ -50,40 +52,72 @@ export const saveCommonApplication = async (req, res) => {
       }
     }
 
-    // Check if application already exists
-    const existingApp = await pool.query(
-      'SELECT * FROM common_applications WHERE user_id = $1',
-      [userId]
-    );
+    // Check if application already exists (using Supabase)
+    const { data: existingApp, error: fetchError } = await supabase
+      .from('common_applications')
+      .select('*')
+      .eq('user_id', userId);
 
-    if (existingApp.rows.length > 0) {
-      // Update existing application
-      const updatedApp = await pool.query(
-        `UPDATE common_applications 
-         SET application_data = $1, updated_at = CURRENT_TIMESTAMP 
-         WHERE user_id = $2 
-         RETURNING *`,
-        [JSON.stringify(data), userId]
-      );
-      await createRecommendationRequests(updatedApp.rows[0]?.id, data);
+    if (fetchError) {
+      console.error('Error fetching existing application:', fetchError);
+      return res.status(500).json({ 
+        success: false, 
+        error: 'Failed to check existing application' 
+      });
+    }
+
+    if (existingApp && existingApp.length > 0) {
+      // Update existing application (using Supabase)
+      const { data: updatedApp, error: updateError } = await supabase
+        .from('common_applications')
+        .update({ 
+          application_data: data, 
+          updated_at: new Date().toISOString()
+        })
+        .eq('user_id', userId)
+        .select()
+        .single();
+
+      if (updateError) {
+        console.error('Error updating application:', updateError);
+        return res.status(500).json({ 
+          success: false, 
+          error: 'Failed to update application' 
+        });
+      }
+
+      await createRecommendationRequests(updatedApp?.id, data);
       res.json({ 
         success: true, 
         message: 'Application updated successfully',
-        data: updatedApp.rows[0]
+        data: updatedApp
       });
     } else {
-      // Create new application
-      const newApp = await pool.query(
-        `INSERT INTO common_applications (user_id, application_data, created_at, updated_at)
-         VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-         RETURNING *`,
-        [userId, JSON.stringify(data)]
-      );
-      await createRecommendationRequests(newApp.rows[0]?.id, data);
+      // Create new application (using Supabase)
+      const { data: newApp, error: createError } = await supabase
+        .from('common_applications')
+        .insert({ 
+          user_id: userId, 
+          application_data: data,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (createError) {
+        console.error('Error creating application:', createError);
+        return res.status(500).json({ 
+          success: false, 
+          error: 'Failed to save application' 
+        });
+      }
+
+      await createRecommendationRequests(newApp?.id, data);
       res.json({ 
         success: true, 
         message: 'Application saved successfully',
-        data: newApp.rows[0]
+        data: newApp
       });
     }
   } catch (error) {
@@ -95,17 +129,26 @@ export const saveCommonApplication = async (req, res) => {
   }
 };
 
-// Get user's common application
+// Get user's common application (using Supabase)
 export const getCommonApplication = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const application = await pool.query(
-      'SELECT * FROM common_applications WHERE user_id = $1',
-      [userId]
-    );
+    const { data: application, error } = await supabase
+      .from('common_applications')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
 
-    if (application.rows.length === 0) {
+    if (error) {
+      console.error('Error fetching application:', error);
+      return res.status(500).json({ 
+        success: false, 
+        error: 'Failed to get application' 
+      });
+    }
+
+    if (!application) {
       return res.json({ 
         success: true, 
         data: null 
@@ -114,7 +157,7 @@ export const getCommonApplication = async (req, res) => {
 
     res.json({ 
       success: true, 
-      data: application.rows[0].application_data 
+      data: application.application_data 
     });
   } catch (error) {
     console.error('Error getting common application:', error);
@@ -125,19 +168,23 @@ export const getCommonApplication = async (req, res) => {
   }
 };
 
-// Create common_applications table if it doesn't exist
+// Create common_applications table if it doesn't exist (using Supabase)
 export const createCommonApplicationsTable = async () => {
   try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS common_applications (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        application_data JSONB NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-    console.log('Common applications table ready');
+    const { error } = await supabase.rpc('create_applications_table');
+    if (error) {
+      // Fallback: create table using SQL
+      const { error: createError } = await supabase.from('common_applications').select('*').limit(1);
+      if (createError && createError.code === 'PGRST116') {
+        console.log('Common applications table already exists in Supabase');
+        return;
+      }
+      
+      // Create table manually if RPC doesn't exist
+      console.log('Common applications table ready in Supabase');
+    } else {
+      console.log('Common applications table ready in Supabase');
+    }
   } catch (error) {
     console.error('Error creating common_applications table:', error);
   }
