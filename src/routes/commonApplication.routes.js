@@ -9,7 +9,7 @@ import {
   createCommonApplicationsTable,
   ensureRecommendationRequestsTable
 } from "../controllers/commonApplication.controller.js";
-import { pool } from "../config/postgres.js";
+import { hasDatabaseConfig, pool } from "../config/postgres.js";
 import { sendEmail } from "../services/email.service.js";
 import { generateAdmissionPdfBuffer } from "../services/pdf.service.js";
 import { generateAdmissionDocxBuffer } from "../services/docx.service.js";
@@ -154,10 +154,23 @@ async function ensureProgramsTable() {
   }
 }
 
-// Initialize tables on startup
-createCommonApplicationsTable();
-ensureRecommendationRequestsTable();
-ensureProgramsTable();
+async function bootstrapCommonApplicationTables() {
+  if (!hasDatabaseConfig) {
+    console.warn('Skipping common application table bootstrap because database config is missing.');
+    return;
+  }
+
+  try {
+    await createCommonApplicationsTable();
+    await ensureRecommendationRequestsTable();
+    await ensureProgramsTable();
+  } catch (error) {
+    console.error('Error initializing common application tables:', error);
+  }
+}
+
+// Initialize tables on startup without letting connection failures crash the app.
+void bootstrapCommonApplicationTables();
 
 // Get available programs (public endpoint)
 router.get("/programs", async (req, res) => {

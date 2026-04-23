@@ -24,7 +24,7 @@ import integrationsRouter from './routes/integrations.routes.js';
 import { errorMiddleware } from './middlewares/error.middleware.js';
 
 // Database
-import { pool } from './config/postgres.js';
+import { pool, hasDatabaseConfig } from './config/postgres.js';
 import { initDatabaseSchema } from './config/initDb.js';
 
 const app = express();
@@ -58,6 +58,11 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ======== DATABASE CONNECTION TEST ========
 (async () => {
+    if (!hasDatabaseConfig) {
+        console.warn('Database configuration missing; skipping schema initialization.');
+        return;
+    }
+
     try {
         await pool.query('SELECT 1'); // simple test query
         await initDatabaseSchema();
