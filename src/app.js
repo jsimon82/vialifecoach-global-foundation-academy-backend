@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from "path";
-import './config/env.js';
+import { FRONTEND_URL } from './config/env.js';
 
 // Routers
 import userRouter from './routes/user.routes.js';
@@ -31,13 +31,43 @@ const app = express();
 
 // ======== MIDDLEWARES ========
 app.use(cookieParser());
-const allowedOrigins = new Set([
+const DEFAULT_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:5174',
     'http://127.0.0.1:5174',
+    'http://localhost:4173',
+    'http://127.0.0.1:4173',
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'https://academy.vialifecoach.org'
+];
+
+function normalizeOrigin(value) {
+    if (!value) return null;
+    const raw = String(value).trim();
+    if (!raw) return null;
+
+    try {
+        return new URL(raw).origin;
+    } catch {
+        return raw.replace(/\/$/, '');
+    }
+}
+
+function splitOrigins(value) {
+    if (!value) return [];
+    return String(value)
+        .split(/[\s,]+/)
+        .map(normalizeOrigin)
+        .filter(Boolean);
+}
+
+const allowedOrigins = new Set([
+    ...DEFAULT_ALLOWED_ORIGINS.map(normalizeOrigin).filter(Boolean),
+    ...splitOrigins(FRONTEND_URL),
+    ...splitOrigins(process.env.FRONTEND_ORIGIN),
+    ...splitOrigins(process.env.FRONTEND_URLS)
 ]);
 
 app.use(cors({

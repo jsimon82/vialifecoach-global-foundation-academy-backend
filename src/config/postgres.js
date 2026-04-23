@@ -1,5 +1,6 @@
 import pkg from 'pg';
 import dotenv from 'dotenv';
+import { supabase } from './supabase.js';
 dotenv.config();
 
 const { Pool } = pkg;

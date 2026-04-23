@@ -12,6 +12,18 @@ import crypto from "crypto";
 import { validateAdminCredentials, getAdminCredentials } from "../utils/adminCredentials.js";
 
 const ADMIN_EMAIL = getAdminCredentials().email;
+const isSecureDeployment =
+  process.env.NODE_ENV === 'production' ||
+  process.env.RENDER === 'true' ||
+  process.env.COOKIE_SECURE === 'true';
+
+const refreshCookieOptions = {
+  httpOnly: true,
+  secure: isSecureDeployment,
+  sameSite: isSecureDeployment ? 'None' : 'Lax',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  path: '/',
+};
 
 // ======= LOGIN CONTROLLER =======
 export const login = catchAsync(async (req, res) => {
@@ -29,13 +41,7 @@ export const login = catchAsync(async (req, res) => {
         { upsert: true, new: true }
       );
 
-      res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: '/',
-      });
+      res.cookie('refreshToken', refreshToken, refreshCookieOptions);
 
       return res.json({
         accessToken,
@@ -77,13 +83,7 @@ export const login = catchAsync(async (req, res) => {
     );
 
     // httponly cookie
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: true, // set to true in production
-      sameSite: 'None',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      path: '/',
-    });
+    res.cookie('refreshToken', refreshToken, refreshCookieOptions);
 
     res.json({
       accessToken,
@@ -104,13 +104,7 @@ export const logout = catchAsync(async (req, res) => {
 
     // remove refresh token
     await Token.deleteOne({ refreshToken: token });
-    res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'None',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      path: '/',
-    });
+    res.clearCookie('refreshToken', refreshCookieOptions);
     res.sendStatus(204);
 });
 
