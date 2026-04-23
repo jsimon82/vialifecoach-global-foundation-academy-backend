@@ -92,6 +92,16 @@ app.use('/api/v1', integrationsRouter);
 app.use('/api/v1', adminRouter);
 
 // ======== HEALTH CHECK ========
+app.get('/', (req, res) => {
+    res.json({
+        ok: true,
+        service: 'vialifecoach-backend',
+        message: 'Backend API is running',
+        health: '/api/v1/health',
+        apiBase: '/api/v1'
+    });
+});
+
 app.get('/api/v1/health', (req, res) => {
     res.json({ ok: true, service: 'vialifecoach-backend', time: new Date().toISOString() });
 });
