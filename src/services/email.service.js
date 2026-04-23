@@ -109,7 +109,7 @@ export const sendVerificationEmail = async (to, token, from) => {
 // password reset email
 export const sendPasswordResetEmail = async (to, token, from) => {
   const subject = "Reset your password";
-  const baseUrl = FRONTEND_URL || "http://localhost:5173";
+  const baseUrl = FRONTEND_URL || "https://academy.vialifecoach.org";
   const resetLink = `${baseUrl.replace(/\/$/, "")}/reset-password?token=${encodeURIComponent(token)}`;
   const html = `
     <p>Hello,</p>
