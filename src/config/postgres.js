@@ -5,14 +5,16 @@ dotenv.config();
 
 const { Pool } = pkg;
 
+// Use local PostgreSQL for internal data (program keywords, AI configs)
+// Fallback to local development PostgreSQL
 const connectionString =
-  process.env.NEXT_PUBLIC_SUPABASE_URL ||
-  process.env.DATABASE_URL ||
   process.env.POSTGRES_URL ||
   process.env.PG_CONNECTION_STRING ||
   process.env.DATABASE_URI ||
   process.env.POSTGRES_CONNECTION_STRING ||
-  null;
+  `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD || 'admin'}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 5432}/${process.env.DB_NAME || 'vialifecoach_db'}`;
+
+// Supabase is handled separately via supabase client
 
 const hasExplicitPoolConfig =
   Boolean(connectionString) ||
