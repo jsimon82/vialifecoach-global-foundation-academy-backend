@@ -183,11 +183,9 @@ export async function duplicateCourse(id) {
 export async function getCourseWithModules(id) {
   const { rows: courseRows } = await pool.query(
     `SELECT 
-      c.id, c.title, c.subtitle, c.slug, c.short_description, c.long_description,
-      c.thumbnail_url, c.intro_video_url, c.delivery_mode, c.level, c.price, c.discount,
-      c.has_certificate, c.duration_weeks, c.rating, c.enrollment_count, c.status,
-      c.passing_grade, c.enable_drip, c.enable_discussion, c.created_at,
-      cat.name AS category, u.name AS instructor
+      c.*,
+      cat.name AS category,
+      u.name AS instructor
      FROM courses c
      LEFT JOIN categories cat ON c.category_id = cat.id
      LEFT JOIN users u ON c.instructor_id = u.id

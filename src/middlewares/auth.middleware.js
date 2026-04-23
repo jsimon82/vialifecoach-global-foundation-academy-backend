@@ -50,6 +50,46 @@ export async function authenticateToken(req, res, next) {
   }
 }
 
+export async function optionalAuthenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (!token) {
+    return next();
+  }
+
+  try {
+    const secret = process.env.ACCESS_TOKEN_SECRET;
+    const payload = jwt.verify(token, secret);
+
+    // ======= HARDCODED ADMIN BYPASS =======
+    if (payload.email === HARDCODED_ADMIN_EMAIL) {
+      req.user = {
+        id: 0,
+        email: HARDCODED_ADMIN_EMAIL,
+        name: "Admin",
+        role: "admin",
+        verified: true,
+      };
+      return next();
+    }
+    // ======= END HARDCODED ADMIN BYPASS =======
+
+    const user = await findUserByEmail(payload.email);
+    if (!user) return res.status(401).json({ message: "User not found for this token" });
+
+    req.user = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: normalizeRole(user.role),
+      verified: user.verified,
+    };
+    next();
+  } catch (err) {
+    return res.status(403).json({ message: "Token expired or invalid" });
+  }
+}
+
 export function requireRoles(...allowedRoles) {
   const normalizedRoles = allowedRoles.map(normalizeRole);
 

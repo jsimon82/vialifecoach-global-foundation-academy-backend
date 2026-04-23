@@ -102,3 +102,39 @@ export async function handleGetCourseOverview(req, res) {
     res.status(500).json({ message: "Server error" });
   }
 }
+
+// ======== GET COURSE MODULES (public) ===========
+export async function getCourseModules(req, res) {
+  try {
+    const result = await CourseModel.getCourseWithModules(req.params.id);
+    if (!result) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    const { moduleLessonRows } = result;
+    const modules = {};
+    moduleLessonRows.forEach(row => {
+      if (!modules[row.module_id]) {
+        modules[row.module_id] = {
+          id: row.module_id,
+          title: row.module_title,
+          order_index: row.module_order,
+          lessons: []
+        };
+      }
+      if (row.lesson_id) {
+        modules[row.module_id].lessons.push({
+          id: row.lesson_id,
+          title: row.lesson_title,
+          content_type: row.content_type,
+          order_index: row.lesson_order
+        });
+      }
+    });
+
+    res.json({ success: true, data: Object.values(modules) });
+  } catch (error) {
+    console.error("Error fetching course modules:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}

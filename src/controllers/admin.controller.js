@@ -4,6 +4,9 @@ import {
   updateUserRole,
 } from "../models/User.model.js";
 
+// Database
+import { pool } from "../config/postgres.js";
+
 // Course models
 import * as CourseModel from "../models/Course.model.js";
 import * as ModuleModel from "../models/Module.model.js";
@@ -16,6 +19,36 @@ function normalizeRole(role) {
   if (!role) return role;
   if (role === "lecturer") return "instructor";
   return role;
+}
+
+function normalizeCourseUpdates(payload) {
+  if (!payload || typeof payload !== "object") return payload;
+  const updates = { ...payload };
+
+  const mapIfMissing = (fromKey, toKey) => {
+    if (updates[toKey] === undefined && updates[fromKey] !== undefined) {
+      updates[toKey] = updates[fromKey];
+    }
+  };
+
+  mapIfMissing("shortDescription", "short_description");
+  mapIfMissing("longDescription", "long_description");
+  mapIfMissing("thumbnailUrl", "thumbnail_url");
+  mapIfMissing("introVideoUrl", "intro_video_url");
+  mapIfMissing("deliveryMode", "delivery_mode");
+  mapIfMissing("scheduleReleaseDate", "schedule_release_date");
+  mapIfMissing("categoryId", "category_id");
+  mapIfMissing("instructorId", "instructor_id");
+  mapIfMissing("durationWeeks", "duration_weeks");
+  mapIfMissing("hasCertificate", "has_certificate");
+  mapIfMissing("enableDrip", "enable_drip");
+  mapIfMissing("enableDiscussion", "enable_discussion");
+
+  if (updates.status === undefined && typeof updates.published === "boolean") {
+    updates.status = updates.published ? "published" : "draft";
+  }
+
+  return updates;
 }
 
 // ======== ADMIN DASHBOARD ========
@@ -78,13 +111,56 @@ export async function deleteUserController(req, res) {
 
 // ======== COURSE MANAGEMENT ========
 
-// Get all courses (admin view)
+// Get all courses (admin view) - WITH MODULES AND LESSONS
 export async function getAllCoursesAdminController(req, res) {
   try {
     const { status, level, category_id, instructor_id } = req.query;
-    const filters = { status, level, category_id, instructor_id };
-    const courses = await CourseModel.getAllCourses(filters);
-    res.json({ success: true, data: courses });
+    
+    // Enhanced query to get courses with modules and lessons
+    let query = `
+      SELECT 
+        c.id, c.title, c.description, c.price, c.thumbnail_url, c.status,
+        CASE WHEN c.status = 'published' THEN TRUE ELSE FALSE END AS published,
+        COUNT(DISTINCT m.id) as module_count,
+        COUNT(DISTINCT l.id) as lesson_count
+      FROM courses c
+      LEFT JOIN modules m ON c.id = m.course_id
+      LEFT JOIN lessons l ON m.id = l.module_id
+      LEFT JOIN categories cat ON c.category_id = cat.id
+      LEFT JOIN users u ON c.instructor_id = u.id
+    `;
+    
+    const params = [];
+    const conditions = [];
+    
+    if (status) {
+      params.push(status);
+      conditions.push(`c.status = $${params.length}`);
+    }
+    if (category_id) {
+      params.push(category_id);
+      conditions.push(`c.category_id = $${params.length}`);
+    }
+    if (level) {
+      params.push(level);
+      conditions.push(`c.level = $${params.length}`);
+    }
+    if (instructor_id) {
+      params.push(instructor_id);
+      conditions.push(`c.instructor_id = $${params.length}`);
+    }
+    
+    if (conditions.length > 0) {
+      query += ` WHERE ${conditions.join(" AND ")}`;
+    }
+    
+    query += ` 
+      GROUP BY c.id, c.title, c.description, c.price, c.thumbnail_url, c.status, cat.name, u.name
+      ORDER BY c.created_at DESC`;
+    
+    const { rows } = await pool.query(query, params);
+    
+    res.json({ success: true, data: rows });
   } catch (error) {
     console.error("Error fetching courses:", error);
     res.status(500).json({ message: "Server error" });
@@ -97,6 +173,9 @@ export async function getCourseAdminController(req, res) {
     const { id } = req.params;
     const courseData = await CourseModel.getCourseWithModules(id);
     if (!courseData) return res.status(404).json({ message: "Course not found" });
+    if (courseData.course) {
+      courseData.course.published = courseData.course.status === "published";
+    }
     res.json({ success: true, data: courseData });
   } catch (error) {
     console.error("Error fetching course:", error);
@@ -120,7 +199,7 @@ export async function createCourseController(req, res) {
 export async function updateCourseController(req, res) {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = normalizeCourseUpdates(req.body);
     const course = await CourseModel.updateCourse(id, updates);
     if (!course) return res.status(404).json({ message: "Course not found" });
     res.json({ success: true, data: course });

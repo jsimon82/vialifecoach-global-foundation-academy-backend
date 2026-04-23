@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import path from "path";
+import './config/env.js';
 
 // Routers
 import userRouter from './routes/user.routes.js';
@@ -8,9 +10,15 @@ import instructorRouter from './routes/instructor.routes.js';
 import courseRouter from './routes/course.routes.js';
 import enrollementRouter from './routes/enrollement.routes.js';
 import authRouter from './routes/auth.routes.js';
+import { verifyEmail, resendVerification } from './controllers/auth.controller.js';
 import adminRouter from './routes/admin.routes.js';
 import quizRouter from './routes/quiz.routes.js';
 import supportRouter from './routes/support.routes.js';
+import commonApplicationRouter from './routes/commonApplication.routes.js';
+import certificateRouter from './routes/certificate.routes.js';
+import communityRouter from './routes/community.routes.js';
+import analyticsRouter from './routes/analytics.routes.js';
+import integrationsRouter from './routes/integrations.routes.js';
 
 // Middlewares
 import { errorMiddleware } from './middlewares/error.middleware.js';
@@ -25,7 +33,11 @@ const app = express();
 app.use(cookieParser());
 const allowedOrigins = new Set([
     'http://localhost:5173',
-    'http://127.0.0.1:5173'
+    'http://127.0.0.1:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5174',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
 ]);
 
 app.use(cors({
@@ -39,7 +51,10 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+
+// Serve uploaded assets
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ======== DATABASE CONNECTION TEST ========
 (async () => {
@@ -54,6 +69,9 @@ app.use(express.json());
 })();
 
 // ======== ROUTES ========
+// Public verification endpoint (kept here to avoid any auth middleware issues)
+app.post('/api/v1/auth/verify-email', verifyEmail);
+app.post('/api/v1/auth/resend-verification', resendVerification);
 app.use('/api/v1', courseRouter);
 app.use('/api/v1', userRouter);
 app.use('/api/v1', enrollementRouter);
@@ -61,7 +79,17 @@ app.use('/api/v1', authRouter);
 app.use('/api/v1', instructorRouter);
 app.use('/api/v1', quizRouter);
 app.use('/api/v1', supportRouter);
+app.use('/api/v1', certificateRouter);
+app.use('/api/v1', commonApplicationRouter);
+app.use('/api/v1', communityRouter);
+app.use('/api/v1', analyticsRouter);
+app.use('/api/v1', integrationsRouter);
 app.use('/api/v1', adminRouter);
+
+// ======== HEALTH CHECK ========
+app.get('/api/v1/health', (req, res) => {
+    res.json({ ok: true, service: 'vialifecoach-backend', time: new Date().toISOString() });
+});
 
 // ======== 404 HANDLER ========
 app.use((req, res, next) => {

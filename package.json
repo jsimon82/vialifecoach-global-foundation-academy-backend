@@ -21,12 +21,17 @@
     "google-auth-library": "^10.5.0",
     "googleapis": "^166.0.0",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.10.1",
     "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "html-to-docx": "^1.2.0",
+    "pdfkit": "^0.18.0",
     "pg": "^8.18.0",
+    "puppeteer": "^23.1.1",
+    "qrcode": "^1.5.4",
     "winston": "^3.19.0"
   }
 }

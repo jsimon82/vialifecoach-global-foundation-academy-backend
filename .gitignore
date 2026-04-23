@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and local runtime files
+*.log
+*.db
+*.sqlite
+combined.log
+debug.log
+error.log
+server.log
+
+# Generated or uploaded content
+generated_videos/
+temp_videos/
+uploads/
+
+# Local backups and history exports
+*.backup
+*.bak
+recovered-codex-history.json

@@ -1,12 +1,14 @@
 import "../config/env.js";
-import { findUserByEmail,createUser, verifyUser } from "../models/User.model.js";
+import { findUserByEmail,createUser, verifyUser, updateUser } from "../models/User.model.js";
 import { AppError } from "../utils/AppError.js";
 import { catchAsync } from "../utils/asyncHelpers.js";
 import { generateAccessToken } from "../utils/utils.jwt.js";
 import { Token } from "../models/Token.model.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
-import { sendVerificationEmail } from "../services/email.service.js";
+import { sendPasswordResetEmail, sendVerificationEmail } from "../services/email.service.js";
+import { pool } from "../config/postgres.js";
+import crypto from "crypto";
 import { validateAdminCredentials, getAdminCredentials } from "../utils/adminCredentials.js";
 
 const ADMIN_EMAIL = getAdminCredentials().email;
@@ -42,6 +44,7 @@ export const login = catchAsync(async (req, res) => {
           name: adminUser.name,
           email: adminUser.email,
           role: adminUser.role,
+          verified: true,
         }
       });
     }
@@ -53,6 +56,14 @@ export const login = catchAsync(async (req, res) => {
     // check password
     const isValidUser = await bcrypt.compare(password, user.password_hash);
     if (!isValidUser) throw new AppError("Invalid email or password", 401);
+
+    if (!user.verified) {
+      return res.status(403).json({
+        message: "Email not verified. Please verify your account.",
+        requiresVerification: true,
+        email: user.email
+      });
+    }
 
     // generate tokens
     const accessToken = generateAccessToken({ id: user.id, email: user.email, role: user.role });
@@ -81,6 +92,7 @@ export const login = catchAsync(async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        verified: user.verified,
       }
     });
 });
@@ -208,4 +220,109 @@ export const verifyEmail = async (req, res) => {
 
   await verifyUser(user.id);
   res.json({ message: "Email verified successfully!" });
+};
+
+export const resendVerification = async (req, res) => {
+  try {
+    const { email } = req.body || {};
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await findUserByEmail(email);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.verified) {
+      return res.status(400).json({ message: "Email already verified" });
+    }
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    await updateUser(user.id, {
+      verification_token: code,
+      verification_expires: expiry
+    });
+
+    await sendVerificationEmail(email, code);
+
+    res.json({ message: "Verification code resent" });
+  } catch (error) {
+    console.error("Error resending verification:", error);
+    res.status(500).json({ message: "Failed to resend verification code" });
+  }
+};
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body || {};
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await findUserByEmail(email);
+    if (!user) {
+      // Avoid email enumeration
+      return res.json({ message: "If the email exists, reset instructions were sent." });
+    }
+
+    const token = crypto.randomBytes(24).toString("hex");
+    const expiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    await pool.query(
+      `INSERT INTO password_reset_tokens (user_id, token, expires_at)
+       VALUES ($1, $2, $3)`,
+      [user.id, token, expiry]
+    );
+
+    await sendPasswordResetEmail(user.email, token);
+
+    res.json({ message: "If the email exists, reset instructions were sent." });
+  } catch (error) {
+    console.error("Error sending password reset:", error);
+    res.status(500).json({ message: "Failed to send reset email" });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token, password } = req.body || {};
+    if (!token || !password) {
+      return res.status(400).json({ message: "Token and new password are required" });
+    }
+
+    const { rows } = await pool.query(
+      `SELECT t.user_id, t.expires_at
+       FROM password_reset_tokens t
+       WHERE t.token = $1
+       ORDER BY t.expires_at DESC
+       LIMIT 1`,
+      [token]
+    );
+
+    if (rows.length === 0) {
+      return res.status(400).json({ message: "Invalid or expired reset token" });
+    }
+
+    const expiresAt = rows[0].expires_at;
+    if (expiresAt && new Date() > new Date(expiresAt)) {
+      return res.status(400).json({ message: "Invalid or expired reset token" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await pool.query(
+      `UPDATE users SET password_hash = $1 WHERE id = $2`,
+      [hashedPassword, rows[0].user_id]
+    );
+
+    await pool.query(
+      `DELETE FROM password_reset_tokens WHERE user_id = $1`,
+      [rows[0].user_id]
+    );
+
+    res.json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    res.status(500).json({ message: "Failed to reset password" });
+  }
 };
