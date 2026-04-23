@@ -5,6 +5,7 @@ dotenv.config();
 const { Pool } = pkg;
 
 const connectionString =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
   process.env.DATABASE_URL ||
   process.env.POSTGRES_URL ||
   process.env.PG_CONNECTION_STRING ||
