@@ -1,20 +1,19 @@
-// Admin credentials encoder/decoder utility
-// Credentials are encoded in base64 to avoid plain text exposure
-// Format: "encodedEmail:encodedPassword"
-
-// To encode new credentials:
-// console.log(Buffer.from("email@domain.com").toString('base64'))
-// console.log(Buffer.from("password").toString('base64'))
-
-const ADMIN_CREDENTIALS = "YWNhZGVteUB2aWFsaWZlY29hY2gub3JnOkFjYWRlbUA=";
+// Admin credentials utility
+// Uses environment variables for secure credential management
 
 export function getAdminCredentials() {
   try {
-    const decoded = Buffer.from(ADMIN_CREDENTIALS, 'base64').toString('utf-8');
-    const [email, password] = decoded.split(':');
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+    
+    if (!email || !password) {
+      console.error("Admin credentials not found in environment variables");
+      return { email: null, password: null };
+    }
+    
     return { email, password };
   } catch (error) {
-    console.error("Failed to decode admin credentials:", error);
+    console.error("Failed to get admin credentials:", error);
     return { email: null, password: null };
   }
 }
