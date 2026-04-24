@@ -3,11 +3,12 @@
 
 export function getAdminCredentials() {
   try {
-    const email = process.env.ADMIN_EMAIL;
-    const password = process.env.ADMIN_PASSWORD;
+    const email = process.env.VITE_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+    const password = process.env.VITE_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
     
     if (!email || !password) {
       console.error("Admin credentials not found in environment variables");
+      console.log("Looking for VITE_ADMIN_EMAIL and VITE_ADMIN_PASSWORD or ADMIN_EMAIL and ADMIN_PASSWORD");
       return { email: null, password: null };
     }
     
