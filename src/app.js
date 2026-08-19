@@ -109,7 +109,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ======== DATABASE CONNECTION TEST ========
-(async () => {
+export const databaseInitialization = (async () => {
     if (!hasDatabaseConfig) {
         console.warn('Database configuration missing; skipping schema initialization.');
         return;
@@ -122,6 +122,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
         console.log('Database schema ready');
     } catch (err) {
         console.error('Database connection failed:', err.message);
+        throw err;
     }
 })();
 
