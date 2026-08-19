@@ -1,4 +1,5 @@
 import { pool } from "../config/postgres.js";
+import { registerGoogleSheetEvent } from "../services/googleAppsScript.service.js";
 
 const STAFF_ROLES = new Set(["admin", "owner", "manager", "content_editor", "support", "instructor", "lecturer"]);
 const SUCCESS_STORY_EXTRA_ROLES = new Set(["alumni", "organization", "partner"]);
@@ -104,6 +105,62 @@ async function loadCommunityProfile(userId) {
     ...profile,
     enrolled_courses: enrollmentsQ.rows,
   };
+}
+
+function parseCommunityEventId(rawEventId) {
+  if (rawEventId === undefined || rawEventId === null) return null;
+  const value = String(rawEventId).trim();
+  if (!value) return null;
+  if (value.startsWith('coord_')) {
+    const id = Number(value.slice(6));
+    return Number.isFinite(id) ? id : null;
+  }
+  const id = Number(value);
+  return Number.isFinite(id) ? id : null;
+}
+
+async function resolveCoordinatorEvent(rawEventId) {
+  const parsedId = parseCommunityEventId(rawEventId);
+  if (parsedId) {
+    const { rows: eventRows } = await pool.query(
+      `SELECT * FROM events WHERE id = $1 LIMIT 1`,
+      [parsedId]
+    );
+    if (eventRows[0]) {
+      const { rows: syncRows } = await pool.query(
+        `SELECT community_event_id FROM event_sync WHERE coordinator_event_id = $1 LIMIT 1`,
+        [parsedId]
+      );
+      return {
+        event: eventRows[0],
+        localEventId: parsedId,
+        externalEventId: syncRows[0]?.community_event_id ?? null
+      };
+    }
+  }
+
+  const numericId = Number(String(rawEventId).trim());
+  if (Number.isFinite(numericId)) {
+    const { rows: syncRows } = await pool.query(
+      `SELECT coordinator_event_id, community_event_id FROM event_sync WHERE community_event_id = $1 LIMIT 1`,
+      [numericId]
+    );
+    if (syncRows[0]) {
+      const { rows: eventRows } = await pool.query(
+        `SELECT * FROM events WHERE id = $1 LIMIT 1`,
+        [syncRows[0].coordinator_event_id]
+      );
+      if (eventRows[0]) {
+        return {
+          event: eventRows[0],
+          localEventId: syncRows[0].coordinator_event_id,
+          externalEventId: syncRows[0].community_event_id
+        };
+      }
+    }
+  }
+
+  return null;
 }
 
 export async function listDiscussionsController(req, res) {
@@ -506,20 +563,32 @@ export async function markChatMessageReadController(req, res) {
 
 export async function listCommunityEventsController(req, res) {
   try {
-    const viewerId = req.user?.id || null;
+    const viewerEmail = req.user?.email ? String(req.user.email).trim().toLowerCase() : null;
     const rows = await pool.query(
-      `SELECT e.id, e.title, e.description, e.event_type, e.start_at, e.max_spots, e.is_active,
-              u.name AS host_name,
-              (SELECT COUNT(*)::int FROM community_event_registrations r WHERE r.event_id = e.id) AS registered_count,
-              EXISTS (
-                SELECT 1 FROM community_event_registrations r
-                WHERE r.event_id = e.id AND r.user_id = $1
-              ) AS is_registered
-       FROM community_events e
-       LEFT JOIN users u ON u.id = e.host_user_id
-       WHERE e.is_active = TRUE
-       ORDER BY e.start_at ASC`,
-      [viewerId]
+      `
+      SELECT 
+        CONCAT('coord_', e.id)::text AS id,
+        e.title,
+        e.description,
+        e.event_type,
+        e.event_date AS start_at,
+        e.max_participants AS max_spots,
+        CASE WHEN e.status = 'upcoming' THEN TRUE ELSE FALSE END AS is_active,
+        'Coordinator' AS host_name,
+        'coordinator' AS event_source,
+        COALESCE(e.current_participants, 0) AS registered_count,
+        EXISTS (
+          SELECT 1 FROM event_registrations r
+          WHERE r.event_id = e.id
+            AND ($1::text IS NOT NULL AND LOWER(r.email) = LOWER($1::text))
+        ) AS is_registered
+      FROM events e
+      INNER JOIN event_sync es ON e.id = es.coordinator_event_id
+      WHERE e.status = 'upcoming'
+        AND es.sync_status = 'synced'
+      ORDER BY start_at ASC
+      `,
+      [viewerEmail]
     );
     return res.json({ success: true, data: rows.rows });
   } catch (error) {
@@ -530,40 +599,112 @@ export async function listCommunityEventsController(req, res) {
 
 export async function registerCommunityEventController(req, res) {
   try {
-    const eventId = Number(req.params.eventId);
-    if (!eventId) return res.status(400).json({ message: "Valid eventId is required" });
+    const resolved = await resolveCoordinatorEvent(req.params.eventId);
+    if (!resolved || !resolved.event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    const event = resolved.event;
+    const localEventId = resolved.localEventId;
+    const externalEventId = resolved.externalEventId;
+
+    if (event.status !== 'upcoming' || !externalEventId) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    if (event.max_participants && event.current_participants >= event.max_participants) {
+      return res.status(400).json({ message: "Event is at full capacity" });
+    }
+
+    let firstName = null;
+    let lastName = null;
+    let email = null;
+    let phone = null;
+    let organization = null;
 
     if (req.user?.id) {
-      await pool.query(
-        `INSERT INTO community_event_registrations (event_id, user_id)
-         VALUES ($1, $2)
-         ON CONFLICT (event_id, user_id) DO NOTHING`,
-        [eventId, req.user.id]
+      const userQ = await pool.query(
+        `SELECT email, name FROM users WHERE id = $1 LIMIT 1`,
+        [req.user.id]
       );
-      return res.status(201).json({ success: true, message: "Registered successfully" });
+      if (!userQ.rows[0]) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const user = userQ.rows[0];
+      email = String(user.email || '').trim().toLowerCase();
+      const [first, last] = String(user.name || '').trim().split(' ');
+      firstName = first || 'User';
+      lastName = last || '';
+      organization = null;
+    } else {
+      const { name, email: guestEmail, phone: guestPhone, organization: guestOrganization } = req.body || {};
+      if (!name || !String(name).trim() || !guestEmail || !String(guestEmail).trim()) {
+        return res.status(400).json({ message: "name and email are required for guest registration" });
+      }
+      email = String(guestEmail).trim().toLowerCase();
+      phone = guestPhone ? String(guestPhone).trim() : null;
+      organization = guestOrganization ? String(guestOrganization).trim() : null;
+      const [first, last] = String(name).trim().split(' ');
+      firstName = first || 'Guest';
+      lastName = last || '';
     }
 
-    const { name, email } = req.body || {};
-    if (!name || !String(name).trim() || !email || !String(email).trim()) {
-      return res.status(400).json({ message: "name and email are required for guest registration" });
-    }
-
-    const existing = await pool.query(
-      `SELECT id FROM community_event_registrations
-       WHERE event_id = $1 AND LOWER(COALESCE(guest_email, '')) = LOWER($2)
-       LIMIT 1`,
-      [eventId, String(email).trim()]
+    const { rows: existingRows } = await pool.query(
+      `SELECT id FROM event_registrations WHERE event_id = $1 AND LOWER(email) = LOWER($2) LIMIT 1`,
+      [localEventId, email]
     );
-    if (existing.rowCount > 0) {
+
+    if (existingRows.length > 0) {
       return res.status(200).json({ success: true, message: "Already registered" });
     }
 
     await pool.query(
-      `INSERT INTO community_event_registrations (event_id, guest_name, guest_email)
-       VALUES ($1, $2, $3)`,
-      [eventId, String(name).trim(), String(email).trim()]
+      `INSERT INTO event_registrations (
+         event_id, first_name, last_name, email, phone,
+         organization, source, status, sync_status
+       ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [
+        localEventId,
+        firstName,
+        lastName,
+        email,
+        phone,
+        organization,
+        'coordinator',
+        'registered',
+        externalEventId ? 'synced' : 'pending'
+      ]
     );
-    return res.status(201).json({ success: true, message: "Registered successfully" });
+
+    await pool.query(
+      `UPDATE events SET current_participants = COALESCE((
+         SELECT COUNT(*)::int FROM event_registrations r
+         WHERE r.event_id = $1
+           AND COALESCE(r.status, 'registered') <> 'cancelled'
+       ), 0), updated_at = NOW() WHERE id = $1`,
+      [localEventId]
+    );
+
+    let sheetSync = { success: false };
+    if (externalEventId) {
+      try {
+        await registerGoogleSheetEvent({
+          eventId: externalEventId,
+          fullName: `${firstName} ${lastName}`.trim(),
+          email,
+          phone,
+          organization
+        });
+        sheetSync = { success: true };
+      } catch (googleError) {
+        console.error('Google Apps Script registration sync failed:', googleError);
+        sheetSync = { success: false, error: String(googleError.message || googleError) };
+      }
+    } else {
+      sheetSync = { success: false, error: 'Event is not synced to Google Sheets yet' };
+    }
+
+    return res.status(201).json({ success: true, sheet_sync: sheetSync, message: "Registered successfully" });
   } catch (error) {
     console.error("Error registering event:", error);
     return res.status(500).json({ message: "Server error" });
@@ -572,18 +713,28 @@ export async function registerCommunityEventController(req, res) {
 
 export async function listCommunityChallengesController(req, res) {
   try {
-    const viewerId = req.user?.id || null;
+    const viewerEmail = req.user?.email ? String(req.user.email).trim().toLowerCase() : null;
     const rows = await pool.query(
-      `SELECT c.id, c.title, c.description, c.duration_days, c.badge, c.is_active,
-              (SELECT COUNT(*)::int FROM community_challenge_participants cp WHERE cp.challenge_id = c.id) AS participants,
-              cp.progress,
-              (cp.user_id IS NOT NULL) AS joined
-       FROM community_challenges c
-       LEFT JOIN community_challenge_participants cp
-         ON cp.challenge_id = c.id AND cp.user_id = $1
-       WHERE c.is_active = TRUE
-       ORDER BY c.id ASC`,
-      [viewerId]
+      `SELECT
+         CONCAT('coord_', e.id)::text AS id,
+         e.title,
+         e.description,
+         e.event_duration AS duration_days,
+         NULL AS badge,
+         CASE WHEN e.status = 'upcoming' THEN TRUE ELSE FALSE END AS is_active,
+         COALESCE(e.current_participants, 0) AS participants,
+         EXISTS (
+           SELECT 1 FROM event_registrations r
+           WHERE r.event_id = e.id
+             AND ($1::text IS NOT NULL AND LOWER(r.email) = LOWER($1::text))
+         ) AS joined
+       FROM events e
+       INNER JOIN event_sync es ON e.id = es.coordinator_event_id
+       WHERE e.status = 'upcoming'
+         AND e.event_type = 'challenge'
+         AND es.sync_status = 'synced'
+       ORDER BY e.event_date ASC`,
+      [viewerEmail]
     );
     return res.json({ success: true, data: rows.rows });
   } catch (error) {
@@ -594,37 +745,104 @@ export async function listCommunityChallengesController(req, res) {
 
 export async function joinCommunityChallengeController(req, res) {
   try {
-    const challengeId = Number(req.params.challengeId);
-    if (!challengeId) return res.status(400).json({ message: "Valid challengeId is required" });
-    if (req.user?.id) {
-      await pool.query(
-        `INSERT INTO community_challenge_participants (challenge_id, user_id, progress)
-         VALUES ($1, $2, 0)
-         ON CONFLICT (challenge_id, user_id) DO NOTHING`,
-        [challengeId, req.user.id]
-      );
-      return res.status(201).json({ success: true, message: "Joined challenge" });
+    const resolved = await resolveCoordinatorEvent(req.params.challengeId);
+    if (!resolved || !resolved.event || resolved.event.event_type !== 'challenge') {
+      return res.status(404).json({ message: "Challenge not found" });
     }
 
-    const { name, email } = req.body || {};
-    if (!name || !String(name).trim() || !email || !String(email).trim()) {
-      return res.status(400).json({ message: "name and email are required for guest challenge registration" });
+    const event = resolved.event;
+    const localEventId = resolved.localEventId;
+    const externalEventId = resolved.externalEventId;
+
+    if (event.status !== 'upcoming' || !externalEventId) {
+      return res.status(404).json({ message: "Challenge not found" });
     }
-    const existing = await pool.query(
-      `SELECT id FROM community_challenge_participants
-       WHERE challenge_id = $1 AND LOWER(COALESCE(guest_email, '')) = LOWER($2)
-       LIMIT 1`,
-      [challengeId, String(email).trim()]
+
+    let firstName = null;
+    let lastName = null;
+    let email = null;
+    let phone = null;
+    let organization = null;
+
+    if (req.user?.id) {
+      const userQ = await pool.query(`SELECT email, name FROM users WHERE id = $1 LIMIT 1`, [req.user.id]);
+      if (!userQ.rows[0]) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const user = userQ.rows[0];
+      email = String(user.email || '').trim().toLowerCase();
+      const [first, last] = String(user.name || '').trim().split(' ');
+      firstName = first || 'User';
+      lastName = last || '';
+    } else {
+      const { name, email: guestEmail, phone: guestPhone, organization: guestOrganization } = req.body || {};
+      if (!name || !String(name).trim() || !guestEmail || !String(guestEmail).trim()) {
+        return res.status(400).json({ message: "name and email are required for guest challenge registration" });
+      }
+      email = String(guestEmail).trim().toLowerCase();
+      phone = guestPhone ? String(guestPhone).trim() : null;
+      organization = guestOrganization ? String(guestOrganization).trim() : null;
+      const [first, last] = String(name).trim().split(' ');
+      firstName = first || 'Guest';
+      lastName = last || '';
+    }
+
+    const { rows: existingRows } = await pool.query(
+      `SELECT id FROM event_registrations WHERE event_id = $1 AND LOWER(email) = LOWER($2) LIMIT 1`,
+      [localEventId, email]
     );
-    if (existing.rowCount > 0) {
+
+    if (existingRows.length > 0) {
       return res.status(200).json({ success: true, message: "Already joined" });
     }
+
     await pool.query(
-      `INSERT INTO community_challenge_participants (challenge_id, guest_name, guest_email, progress)
-       VALUES ($1, $2, $3, 0)`,
-      [challengeId, String(name).trim(), String(email).trim()]
+      `INSERT INTO event_registrations (
+         event_id, first_name, last_name, email, phone,
+         organization, source, status, sync_status
+       ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [
+        localEventId,
+        firstName,
+        lastName,
+        email,
+        phone,
+        organization,
+        'coordinator',
+        'registered',
+        externalEventId ? 'synced' : 'pending'
+      ]
     );
-    return res.status(201).json({ success: true, message: "Joined challenge" });
+
+    await pool.query(
+      `UPDATE events SET current_participants = COALESCE((
+         SELECT COUNT(*)::int FROM event_registrations r
+         WHERE r.event_id = $1
+           AND COALESCE(r.status, 'registered') <> 'cancelled'
+       ), 0), updated_at = NOW() WHERE id = $1`,
+      [localEventId]
+    );
+
+    let sheetSync = { success: false };
+    if (externalEventId) {
+      try {
+        await registerGoogleSheetEvent({
+          eventId: externalEventId,
+          fullName: `${firstName} ${lastName}`.trim(),
+          email,
+          phone,
+          organization
+        });
+        sheetSync = { success: true };
+      } catch (googleError) {
+        console.error('Google Apps Script registration sync failed:', googleError);
+        sheetSync = { success: false, error: String(googleError.message || googleError) };
+      }
+    } else {
+      sheetSync = { success: false, error: 'Challenge is not synced to Google Sheets yet' };
+    }
+
+    return res.status(201).json({ success: true, sheet_sync: sheetSync, message: "Joined challenge" });
   } catch (error) {
     console.error("Error joining challenge:", error);
     return res.status(500).json({ message: "Server error" });
@@ -682,9 +900,7 @@ export async function getSuccessStoryPermissionsController(req, res) {
 
 export async function listCommunityMentorsController(req, res) {
   try {
-    if (!(await canAccessRestrictedCommunity(req.user))) {
-      return res.status(403).json({ message: "Mentorship is available only to enrolled students, lecturers, and mentors." });
-    }
+    const viewerId = req.user?.id || null;
     const rows = await pool.query(
       `SELECT m.id, m.name, m.expertise, m.bio, m.sessions, m.rating, m.available, m.is_active,
               EXISTS (
@@ -694,7 +910,7 @@ export async function listCommunityMentorsController(req, res) {
        FROM community_mentors m
        WHERE m.is_active = TRUE
        ORDER BY m.available DESC, m.rating DESC, m.id ASC`,
-      [req.user.id]
+      [viewerId]
     );
     return res.json({ success: true, data: rows.rows });
   } catch (error) {

@@ -18,16 +18,29 @@ import commonApplicationRouter from './routes/commonApplication.routes.js';
 import certificateRouter from './routes/certificate.routes.js';
 import communityRouter from './routes/community.routes.js';
 import analyticsRouter from './routes/analytics.routes.js';
+import eventRouter from './routes/event.routes.js';
+import coordinatorRouter from './routes/coordinator.routes.js';
 import integrationsRouter from './routes/integrations.routes.js';
+import publicRegistrationRouter from './routes/publicRegistration.routes.js';
+import eventSyncRouter from './routes/eventSync.routes.js';
+import registrationStatsRouter from './routes/registrationStats.routes.js';
+import testRouter from './routes/test.routes.js';
+import { renderCertificateVerificationPage } from './controllers/certificate.controller.js';
 
 // Middlewares
 import { errorMiddleware } from './middlewares/error.middleware.js';
+import { createRateLimiter } from './middlewares/rateLimiter.middleware.js';
 
 // Database
 import { pool, hasDatabaseConfig } from './config/postgres.js';
 import { initDatabaseSchema } from './config/initDb.js';
 
 const app = express();
+const certificateVerificationLimiter = createRateLimiter({
+    windowMs: 60 * 1000,
+    maxRequests: 30,
+    message: "Too many certificate verification requests, please slow down."
+});
 
 // ======== MIDDLEWARES ========
 app.use(cookieParser());
@@ -74,7 +87,16 @@ app.use(cors({
     origin: (origin, callback) => {
         // Allow non-browser tools (Postman/curl) that do not send Origin
         if (!origin) return callback(null, true);
+        
+        // Allow null origin (for development and testing)
+        if (origin === 'null') return callback(null, true);
+        
+        // Check if origin is in allowed list
         if (allowedOrigins.has(origin)) return callback(null, true);
+        
+        // For development, allow localhost on any port
+        if (origin.includes('localhost') || origin.includes('127.0.0.1')) return callback(null, true);
+        
         return callback(new Error('Not allowed by CORS'));
     },
     credentials: true,
@@ -107,6 +129,21 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 // Public verification endpoint (kept here to avoid any auth middleware issues)
 app.post('/api/v1/auth/verify-email', verifyEmail);
 app.post('/api/v1/auth/resend-verification', resendVerification);
+
+// Registration stats routes (mount first to avoid conflicts)
+app.use('/api/v1/registration-stats', registrationStatsRouter);
+
+// Public endpoints (no authentication required)
+app.use('/api/v1/public', publicRegistrationRouter);
+app.use('/api/v1/sync', eventSyncRouter);
+
+// Test routes (for debugging)
+app.use('/api/v1', testRouter);
+
+// Coordinator routes
+app.use('/api/v1/coordinator', coordinatorRouter);
+
+// Other routes
 app.use('/api/v1', courseRouter);
 app.use('/api/v1', userRouter);
 app.use('/api/v1', enrollementRouter);
@@ -119,7 +156,11 @@ app.use('/api/v1', commonApplicationRouter);
 app.use('/api/v1', communityRouter);
 app.use('/api/v1', analyticsRouter);
 app.use('/api/v1', integrationsRouter);
+app.use('/api/v1', eventRouter);
 app.use('/api/v1', adminRouter);
+
+// Public verification page
+app.get('/verify/:certificateId', certificateVerificationLimiter, renderCertificateVerificationPage);
 
 // ======== HEALTH CHECK ========
 app.get('/', (req, res) => {

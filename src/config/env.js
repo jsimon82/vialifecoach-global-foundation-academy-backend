@@ -25,6 +25,23 @@ for (const candidate of envCandidates) {
   }
 }
 
+// Keep legacy and new Supabase env names in sync so either path works.
+if (!process.env.SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  process.env.SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+}
+
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_URL) {
+  process.env.NEXT_PUBLIC_SUPABASE_URL = process.env.SUPABASE_URL;
+}
+
+if (!process.env.SUPABASE_PUBLISHABLE_KEY && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+  process.env.SUPABASE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+}
+
+if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY && process.env.SUPABASE_PUBLISHABLE_KEY) {
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY;
+}
+
 export const {
   PORT,
   ACCESS_TOKEN_SECRET,
@@ -47,5 +64,11 @@ export const {
   EMAIL_FROM_ACADEMY,
   EMAIL_FROM_INFO,
   EMAIL_FROM_PARTNERSHIP,
-  FRONTEND_URL
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+  FRONTEND_URL,
+  GOOGLE_APPS_SCRIPT_URL,
+  GOOGLE_APPS_SCRIPT_ADMIN_KEY
 } = process.env;

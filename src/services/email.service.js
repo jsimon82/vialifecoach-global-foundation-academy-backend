@@ -15,6 +15,7 @@ import {
   EMAIL_FROM_INFO,
   FRONTEND_URL
 } from "../config/env.js";
+import { pool } from "../config/postgres.js";
 
 const ACADEMY_EMAIL = "academy@vialifecoach.org";
 const SUPPORT_EMAIL = "support@vialifecoach.org";
@@ -119,4 +120,131 @@ export const sendPasswordResetEmail = async (to, token, from) => {
   `;
   const text = `Reset your password using this link: ${resetLink}`;
   return sendEmail({ to, subject, html, text, from });
+};
+
+async function getEventEmailTemplate(type) {
+  const templateName = type === 'confirmation' ? 'Event Registration Confirmation' : 'Event Reminder';
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT *
+       FROM email_templates
+       WHERE LOWER(template_name) = LOWER($1)
+         AND is_active = true
+         AND (event_type IS NULL OR LOWER(event_type) = 'all')
+       ORDER BY updated_at DESC NULLS LAST, created_at DESC NULLS LAST, id DESC
+       LIMIT 1`,
+      [templateName]
+    );
+
+    return rows[0] || null;
+  } catch (error) {
+    console.error('Error fetching email template from PostgreSQL:', error.message);
+    return null;
+  }
+}
+
+// Event email functionality
+export const sendEventEmail = async ({ type, recipient, event, registration, custom_message }) => {
+  try {
+    const template = await getEventEmailTemplate(type);
+    if (!template) {
+      return sendDefaultEventEmail({ type, recipient, event, registration, custom_message });
+    }
+
+    // Replace template variables
+    let subject = template.subject;
+    let htmlContent = template.html_content;
+    let textContent = template.text_content;
+
+    const replacements = {
+      '{{event_title}}': event.title,
+      '{{event_date}}': new Date(event.event_date).toLocaleString(),
+      '{{event_duration}}': event.event_duration || 60,
+      '{{event_type}}': event.event_type,
+      '{{first_name}}': registration.first_name,
+      '{{last_name}}': registration.last_name,
+      '{{email}}': registration.email
+    };
+
+    // Replace placeholders
+    for (const [placeholder, value] of Object.entries(replacements)) {
+      subject = subject.replace(new RegExp(placeholder.replace(/[{}]/g, '\\$&'), 'g'), value);
+      htmlContent = htmlContent.replace(new RegExp(placeholder.replace(/[{}]/g, '\\$&'), 'g'), value);
+      textContent = textContent.replace(new RegExp(placeholder.replace(/[{}]/g, '\\$&'), 'g'), value);
+    }
+
+    // Add custom message for reminders
+    if (type === 'reminder' && custom_message) {
+      htmlContent = `<p>${custom_message}</p><br/>` + htmlContent;
+      textContent = `${custom_message}\n\n` + textContent;
+    }
+
+    return sendEmail({
+      to: recipient,
+      subject,
+      html: htmlContent,
+      text: textContent,
+      from: EMAIL_FROM_SUPPORT || SUPPORT_EMAIL
+    });
+
+  } catch (error) {
+    console.error('Error sending event email:', error);
+    throw error;
+  }
+};
+
+// Default event email fallback
+const sendDefaultEventEmail = async ({ type, recipient, event, registration, custom_message }) => {
+  const subject = type === 'confirmation' 
+    ? `Registration Confirmed: ${event.title}`
+    : `Reminder: ${event.title} starts soon!`;
+
+  const html = `
+    <h2>${type === 'confirmation' ? 'Registration Confirmed!' : 'Event Reminder'}</h2>
+    <p>Dear ${registration.first_name} ${registration.last_name},</p>
+    ${type === 'confirmation' 
+      ? `<p>Thank you for registering for <strong>${event.title}</strong>.</p>`
+      : `<p>This is a friendly reminder that <strong>${event.title}</strong> is starting soon.</p>`
+    }
+    <p><strong>Event Details:</strong></p>
+    <ul>
+      <li>Date: ${new Date(event.event_date).toLocaleString()}</li>
+      <li>Duration: ${event.event_duration || 60} minutes</li>
+      <li>Type: ${event.event_type}</li>
+    </ul>
+    ${custom_message ? `<p>${custom_message}</p>` : ''}
+    <p>${type === 'confirmation' ? 'We look forward to seeing you there!' : 'Don\'t miss out!'}</p>
+    <p>Best regards,<br>ViaLife Coach Team</p>
+  `;
+
+  const text = `
+${type === 'confirmation' ? 'Registration Confirmed!' : 'Event Reminder'}
+
+Dear ${registration.first_name} ${registration.last_name},
+
+${type === 'confirmation' 
+  ? `Thank you for registering for ${event.title}.`
+  : `This is a friendly reminder that ${event.title} is starting soon.`
+}
+
+Event Details:
+Date: ${new Date(event.event_date).toLocaleString()}
+Duration: ${event.event_duration || 60} minutes
+Type: ${event.event_type}
+
+${custom_message ? `${custom_message}\n` : ''}
+${type === 'confirmation' ? 'We look forward to seeing you there!' : 'Don\'t miss out!'}
+
+Best regards,
+ViaLife Coach Team
+  `;
+
+  return sendEmail({
+    to: recipient,
+    subject,
+    html,
+    text,
+    from: EMAIL_FROM_SUPPORT || SUPPORT_EMAIL
+  });
 };

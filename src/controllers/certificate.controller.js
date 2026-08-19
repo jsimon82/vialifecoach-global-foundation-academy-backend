@@ -4,6 +4,9 @@ import { sanitizeInput } from "../utils/validator.js";
 import crypto from "crypto";
 import QRCode from "qrcode";
 
+const ORGANIZATION_NAME = "Vialifecoach Global Foundation";
+const ORGANIZATION_LOGO_URL = "https://i.postimg.cc/dDPqTDcm/vialife.png";
+
 // Official certificate HTML template (DO NOT MODIFY)
 const CERTIFICATE_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
@@ -263,6 +266,549 @@ async function generateQrDataUrl(url) {
   }
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatDisplayDate(value) {
+  if (!value) return "N/A";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+function generateCertificateIdentifier() {
+  return `CERT-${crypto.randomUUID()}`;
+}
+
+function getPublicBaseUrl(req) {
+  const configuredBaseUrl = (
+    process.env.PUBLIC_BASE_URL ||
+    process.env.APP_PUBLIC_URL ||
+    process.env.SERVER_PUBLIC_URL ||
+    process.env.BACKEND_PUBLIC_URL ||
+    ""
+  ).trim().replace(/\/$/, "");
+
+  if (configuredBaseUrl) {
+    return configuredBaseUrl;
+  }
+
+  if (req) {
+    const forwardedProto = req.get?.("x-forwarded-proto");
+    const forwardedHost = req.get?.("x-forwarded-host");
+    const host = forwardedHost || req.get?.("host") || `localhost:${process.env.PORT || 5000}`;
+    const protocol = forwardedProto || req.protocol || "http";
+    return `${protocol}://${host}`.replace(/\/$/, "");
+  }
+
+  return `http://localhost:${process.env.PORT || 5000}`;
+}
+
+function buildVerificationUrl(req, certificateId) {
+  return `${getPublicBaseUrl(req)}/verify/${encodeURIComponent(certificateId)}`;
+}
+
+function buildLinkedInShareUrl(credentialUrl) {
+  return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(credentialUrl)}`;
+}
+
+function normalizeVerificationStatus(record) {
+  const rawStatus = String(record?.status || "").toLowerCase();
+  const expiryDate = record?.expiry_date ? new Date(record.expiry_date) : null;
+  const isExpired = expiryDate && !Number.isNaN(expiryDate.getTime()) && expiryDate.getTime() < Date.now();
+
+  if (rawStatus === "revoked" || record?.revoked_at) {
+    return "revoked";
+  }
+
+  if (rawStatus === "expired" || isExpired) {
+    return "expired";
+  }
+
+  return "valid";
+}
+
+function humanizeVerificationStatus(status) {
+  switch (status) {
+    case "valid":
+      return "Valid";
+    case "expired":
+      return "Expired";
+    case "revoked":
+      return "Revoked";
+    default:
+      return "Not Found";
+  }
+}
+
+function resolveCertificateIdentifier(record) {
+  return record?.certificate_id || record?.certificate_code || "";
+}
+
+async function buildVerificationContext(record, req) {
+  if (!record) {
+    return null;
+  }
+
+  const certificateId = resolveCertificateIdentifier(record);
+  const credentialUrl = record.credential_url || record.certificate_url || buildVerificationUrl(req, certificateId);
+  const qrCodeUrl = record.qr_code_url || (await generateQrDataUrl(credentialUrl));
+  const verificationStatus = normalizeVerificationStatus(record);
+
+  return {
+    ...record,
+    certificate_id: certificateId,
+    credential_url: credentialUrl,
+    qr_code_url: qrCodeUrl,
+    verification_status: verificationStatus,
+    verification_status_label: humanizeVerificationStatus(verificationStatus),
+    linkedin_share_url: buildLinkedInShareUrl(credentialUrl),
+    issue_date_display: formatDisplayDate(record.issue_date || record.issued_at || record.created_at),
+    expiry_date_display: formatDisplayDate(record.expiry_date),
+    verification_url: buildVerificationUrl(req, certificateId)
+  };
+}
+
+function renderVerificationPageHtml(context) {
+  const {
+    certificate_id = "",
+    full_name = "Unknown recipient",
+    certificate_title = "Certificate of Completion",
+    organization_name = ORGANIZATION_NAME,
+    issue_date_display = "N/A",
+    expiry_date_display = "N/A",
+    verification_status_label = "Not Found",
+    credential_url = "",
+    qr_code_url = "",
+    linkedin_share_url = "",
+    course_description = "",
+    user_email = "",
+    verification_url = ""
+  } = context || {};
+
+  const statusClass = String(context?.verification_status || "not_found");
+  const isFound = statusClass !== "not_found";
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate Verification</title>
+  <meta name="description" content="Public certificate verification page" />
+  <meta property="og:title" content="Certificate Verification" />
+  <meta property="og:url" content="${escapeHtml(verification_url)}" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3efe6;
+      --card: #ffffff;
+      --ink: #14213d;
+      --muted: #5b6473;
+      --accent: #c6a75e;
+      --accent-dark: #9d7d34;
+      --success: #0f8a5f;
+      --warning: #cc7a00;
+      --danger: #b42318;
+      --border: rgba(20, 33, 61, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(198, 167, 94, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(20, 33, 61, 0.08), transparent 18%),
+        linear-gradient(180deg, #faf7f0 0%, #f3efe6 45%, #ede7dc 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(20, 33, 61, 0.10);
+      overflow: hidden;
+    }
+
+    .panel-inner { padding: 28px; }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 3vw, 3.1rem);
+      line-height: 1.05;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .status-pill.valid { color: var(--success); }
+    .status-pill.expired { color: var(--warning); }
+    .status-pill.revoked { color: var(--danger); }
+    .status-pill.not_found { color: var(--muted); }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .field {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(251,249,244,0.96));
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .field-value {
+      font-size: 15px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-wrap img {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 8px;
+    }
+
+    .org-name {
+      font-weight: 800;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .org-subtitle {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .qr-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100%;
+    }
+
+    .qr-box img {
+      width: 180px;
+      height: 180px;
+      border-radius: 18px;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(20, 33, 61, 0.08);
+    }
+
+    .qr-caption {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button, .button-link {
+      appearance: none;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover, .button-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(20, 33, 61, 0.12);
+    }
+
+    .button.primary, .button-link.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    }
+
+    .button.secondary, .button-link.secondary {
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .empty-state {
+      border-left: 4px solid var(--danger);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .details { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="panel">
+        <div class="panel-inner">
+          <div class="eyebrow">Public verification</div>
+          <h1>${isFound ? "Certificate Verified" : "Certificate Not Found"}</h1>
+          <p class="lede">
+            ${isFound
+              ? "This page confirms the certificate details below and gives you a public verification link that can be shared on LinkedIn, resumes, and other professional profiles."
+              : "We could not find a matching certificate. If you pasted the link manually, please double-check the credential ID."}
+          </p>
+          <div class="status-pill ${escapeHtml(statusClass)}">${escapeHtml(verification_status_label)}</div>
+
+          <div class="details">
+            <div class="field">
+              <span class="field-label">Credential ID</span>
+              <div class="field-value">${escapeHtml(certificate_id || "N/A")}</div>
+            </div>
+            <div class="field">
+              <span class="field-label">Recipient</span>
+              <div class="field-value">${escapeHtml(full_name || "N/A")}</div>
+            </div>
+            <div class="field">
+              <span class="field-label">Certificate Title</span>
+              <div class="field-value">${escapeHtml(certificate_title || "N/A")}</div>
+            </div>
+            <div class="field">
+              <span class="field-label">Issuing Organization</span>
+              <div class="field-value">${escapeHtml(organization_name || ORGANIZATION_NAME)}</div>
+            </div>
+            <div class="field">
+              <span class="field-label">Issue Date</span>
+              <div class="field-value">${escapeHtml(issue_date_display)}</div>
+            </div>
+            <div class="field">
+              <span class="field-label">Expiry Date</span>
+              <div class="field-value">${escapeHtml(expiry_date_display)}</div>
+            </div>
+          </div>
+
+          ${course_description ? `
+            <div class="field" style="margin-top: 14px;">
+              <span class="field-label">Description</span>
+              <div class="field-value">${escapeHtml(course_description)}</div>
+            </div>
+          ` : ""}
+
+          ${user_email ? `
+            <div class="field" style="margin-top: 14px;">
+              <span class="field-label">Recipient Email</span>
+              <div class="field-value">${escapeHtml(user_email)}</div>
+            </div>
+          ` : ""}
+
+          <div class="actions">
+            <a class="button-link primary" href="${escapeHtml(linkedin_share_url || "#")}" target="_blank" rel="noreferrer">
+              Share on LinkedIn
+            </a>
+            <button class="button secondary" type="button" id="copy-link-btn" data-link="${escapeHtml(credential_url)}">
+              Copy Link
+            </button>
+          </div>
+
+          <div class="footer-note">
+            Credential URL: <strong>${escapeHtml(credential_url || verification_url || "N/A")}</strong>
+          </div>
+        </div>
+      </article>
+
+      <aside class="side">
+        <section class="panel">
+          <div class="panel-inner qr-box">
+            <div class="logo-wrap" style="margin-bottom: 14px;">
+              <img src="${ORGANIZATION_LOGO_URL}" alt="Organization logo" />
+              <div>
+                <p class="org-name">${escapeHtml(organization_name || ORGANIZATION_NAME)}</p>
+                <p class="org-subtitle">Official certificate verification</p>
+              </div>
+            </div>
+            ${isFound && qr_code_url ? `<img src="${escapeHtml(qr_code_url)}" alt="Certificate QR code" />` : `<div class="empty-state">QR code not available.</div>`}
+            <div class="qr-caption">Scan to open the public verification page.</div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-inner">
+            <div class="eyebrow">What this means</div>
+            <p class="lede" style="margin: 0;">
+              ${isFound
+                ? "The certificate is publicly verifiable. The verification link and QR code point to the same credential page, making it simple to share on LinkedIn."
+                : "If this certificate should exist, confirm that the credential ID is correct or ask the issuing organization to resend the verification link."}
+            </p>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    const copyButton = document.getElementById('copy-link-btn');
+    if (copyButton) {
+      copyButton.addEventListener('click', async () => {
+        const link = copyButton.dataset.link || '';
+        try {
+          await navigator.clipboard.writeText(link);
+          const previous = copyButton.textContent;
+          copyButton.textContent = 'Copied';
+          setTimeout(() => { copyButton.textContent = previous; }, 1400);
+        } catch (error) {
+          alert('Copy failed. Please copy the URL manually.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>`;
+}
+
+async function fetchCertificateVerificationRecord(identifier) {
+  const normalizedIdentifier = String(identifier || "").trim();
+  if (!normalizedIdentifier) {
+    return null;
+  }
+
+  const query = `
+    SELECT
+      c.id,
+      c.user_id,
+      c.student_id,
+      c.course_id,
+      COALESCE(c.certificate_id, c.certificate_code) AS certificate_id,
+      COALESCE(c.certificate_code, c.certificate_id) AS certificate_code,
+      COALESCE(NULLIF(c.full_name, ''), NULLIF(CONCAT_WS(' ', u.first_name, u.last_name), ''), u.name, 'Unknown Recipient') AS full_name,
+      COALESCE(NULLIF(c.certificate_title, ''), course.title, 'Certificate of Completion') AS certificate_title,
+      COALESCE(NULLIF(c.organization_name, ''), $2) AS organization_name,
+      COALESCE(c.issue_date, c.issued_at, c.created_at, NOW()) AS issue_date,
+      c.expiry_date,
+      c.status,
+      COALESCE(c.credential_url, c.certificate_url) AS credential_url,
+      c.certificate_url,
+      c.qr_code_url,
+      c.revoked_at,
+      c.revoke_reason,
+      c.certificate_html,
+      c.certificate_pdf_url,
+      u.email AS user_email,
+      course.description AS course_description,
+      CASE
+        WHEN LOWER(COALESCE(c.status, '')) = 'revoked' OR c.revoked_at IS NOT NULL THEN 'revoked'
+        WHEN LOWER(COALESCE(c.status, '')) = 'expired' OR (c.expiry_date IS NOT NULL AND c.expiry_date < NOW()) THEN 'expired'
+        ELSE 'valid'
+      END AS verification_status
+    FROM certificates c
+    LEFT JOIN users u ON u.id = COALESCE(c.user_id, c.student_id)
+    LEFT JOIN courses course ON course.id = c.course_id
+    WHERE LOWER(COALESCE(c.certificate_id, c.certificate_code)) = LOWER($1)
+       OR LOWER(COALESCE(c.certificate_code, c.certificate_id)) = LOWER($1)
+    LIMIT 1
+  `;
+
+  const { rows } = await pool.query(query, [normalizedIdentifier, ORGANIZATION_NAME]);
+  return rows[0] || null;
+}
+
 // Replace placeholders in certificate template
 function populateCertificateTemplate(template, data) {
   return template
@@ -279,7 +825,6 @@ function populateCertificateTemplate(template, data) {
 // Get certificate preview (public)
 export async function getCertificatePreviewController(req, res) {
   try {
-    // Return template with sample data for preview
     const sampleData = {
       student_name: "John Doe",
       course_title: "Life Coaching Fundamentals",
@@ -289,75 +834,11 @@ export async function getCertificatePreviewController(req, res) {
       qr_code_url: ""
     };
 
-    const verifyUrl = `${req.protocol}://${req.get("host")}/verify/${sampleData.certificate_code}`;
+    const verifyUrl = buildVerificationUrl(req, sampleData.certificate_code);
     sampleData.qr_code_url = await generateQrDataUrl(verifyUrl);
-    
-    // Create a simple working template with proper logo
-    const workingTemplate = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Certificate of Completion</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Montserrat', sans-serif; }
-.certificate-container { 
-  width: 1123px; height: 794px; background: white; margin: 30px auto; padding: 60px; 
-  position: relative; box-sizing: border-box; border: 15px solid #C6A75E; overflow: hidden; 
-}
-.inner-border { border: 3px solid #C6A75E; height: 100%; padding: 50px; box-sizing: border-box; text-align: center; position: relative; }
-.foundation-name { font-family: 'Playfair Display', serif; font-size: 30px; letter-spacing: 4px; color: #1F2A44; margin-bottom: 20px; }
-.certificate-title { font-family: 'Playfair Display', serif; font-size: 26px; color: #C6A75E; letter-spacing: 6px; margin: 20px 0; }
-.divider { width: 180px; height: 2px; background-color: #C6A75E; margin: 20px auto; }
-.presented-text { font-size: 18px; margin: 20px 0; }
-.student-name { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin: 25px 0; color: #1F2A44; }
-.course-title { font-family: 'Playfair Display', serif; font-size: 26px; font-style: italic; margin: 20px 0; }
-.course-description { font-size: 16px; width: 75%; margin: 0 auto; line-height: 1.6; }
-.logo-container { margin: 20px auto; text-align: center; }
-.logo-container img { width: 120px; height: auto; }
-.footer-section { position: absolute; bottom: 70px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: center; }
-.signature-name { font-family: 'Playfair Display', serif; font-size: 18px; }
-.signature-title { font-size: 14px; }
-.certificate-id { position: absolute; bottom: 20px; right: 60px; font-size: 12px; }
-</style>
-</head>
-<body>
-<div class="certificate-container">
-  <div class="inner-border">
-    <div class="logo-container">
-      <img src="https://i.postimg.cc/dDPqTDcm/vialife.png" alt="Vialifecoach Logo" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </div>
-    <div class="foundation-name">VIALIFECOACH GLOBAL FOUNDATION</div>
-    <div class="certificate-title">CERTIFICATE OF COMPLETION</div>
-    <div class="divider"></div>
-    <div class="presented-text">This is to proudly certify that</div>
-    <div class="student-name">${sampleData.student_name}</div>
-    <div class="presented-text">has successfully completed the certified course</div>
-    <div class="course-title">"${sampleData.course_title}"</div>
-    <div class="course-description">${sampleData.course_description}</div>
-    <div class="presented-text" style="margin-top: 25px;">Offered by Vialifecoach Global Foundation</div>
-    <div class="logo-container">
-      <img src="https://i.postimg.cc/dDPqTDcm/vialife.png" alt="Vialifecoach Logo" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </div>
-    <div class="footer-section">
-      <div>
-        <div class="signature-name">Simon Pierre Gahibare</div>
-        <div class="signature-title">Founder & Certified Mental Health Coach</div>
-      </div>
-      <div class="qr">
-        <img src="${sampleData.qr_code_url}" alt="QR Code" style="width:100px;height:100px;">
-        <div style="font-size:12px;">Scan to Verify</div>
-      </div>
-    </div>
-    <div class="certificate-id">Issued on: ${sampleData.issue_date} | Certificate ID: ${sampleData.certificate_code}</div>
-  </div>
-</div>
-</body>
-</html>`;
-    
+    const certificateHtml = populateCertificateTemplate(CERTIFICATE_TEMPLATE, sampleData);
     res.setHeader('Content-Type', 'text/html');
-    res.send(workingTemplate);
+    res.send(certificateHtml);
   } catch (error) {
     console.error("Error getting certificate preview:", error);
     res.status(500).json({ message: "Failed to load certificate preview" });
@@ -372,20 +853,21 @@ export async function getStudentCertificatesController(req, res) {
     const query = `
       SELECT 
         c.id,
-        c.certificate_code,
-        c.issue_date,
+        COALESCE(c.certificate_id, c.certificate_code) AS certificate_id,
+        COALESCE(c.certificate_code, c.certificate_id) AS certificate_code,
+        COALESCE(c.issue_date, c.issued_at, c.created_at) AS issue_date,
         c.certificate_html,
         c.certificate_pdf_url,
         c.status,
-        u.first_name || ' ' || u.last_name as student_name,
+        COALESCE(NULLIF(CONCAT_WS(' ', u.first_name, u.last_name), ''), u.name) as student_name,
         u.email as student_email,
         course.title as course_title,
         course.description as course_description
       FROM certificates c
-      JOIN users u ON c.student_id = u.id
+      JOIN users u ON u.id = COALESCE(c.student_id, c.user_id)
       JOIN courses course ON c.course_id = course.id
-      WHERE c.student_id = $1
-      ORDER BY c.issue_date DESC
+      WHERE COALESCE(c.student_id, c.user_id) = $1
+      ORDER BY COALESCE(c.issue_date, c.issued_at, c.created_at) DESC
     `;
     
     const { rows } = await pool.query(query, [studentId]);
@@ -397,51 +879,163 @@ export async function getStudentCertificatesController(req, res) {
   }
 }
 
-// Verify certificate by code
+// Verify certificate by public identifier
 export async function verifyCertificateController(req, res) {
   try {
-    const { certificateCode } = req.params;
-    
-    const query = `
-      SELECT 
-        c.id,
-        c.certificate_code,
-        c.issue_date,
-        c.status,
-        u.first_name || ' ' || u.last_name as student_name,
-        u.email as student_email,
-        course.title as course_title,
-        course.description as course_description
-      FROM certificates c
-      JOIN users u ON c.student_id = u.id
-      JOIN courses course ON c.course_id = course.id
-      WHERE c.certificate_code = $1
-    `;
-    
-    const { rows } = await pool.query(query, [certificateCode]);
-    
-    if (rows.length === 0) {
-      return res.status(404).json({ message: "Certificate not found" });
+    const { certificateCode, certificateId } = req.params;
+    const identifier = certificateCode || certificateId;
+    const record = await fetchCertificateVerificationRecord(identifier);
+
+    if (!record) {
+      return res.status(404).json({
+        message: "Certificate not found",
+        verification_status: "not_found"
+      });
     }
-    
-    res.json(rows[0]);
+
+    const context = await buildVerificationContext(record, req);
+
+    res.json({
+      id: context.id,
+      certificate_id: context.certificate_id,
+      certificate_code: context.certificate_code,
+      full_name: context.full_name,
+      certificate_title: context.certificate_title,
+      organization_name: context.organization_name,
+      issue_date: context.issue_date,
+      issue_date_display: context.issue_date_display,
+      expiry_date: context.expiry_date,
+      expiry_date_display: context.expiry_date_display,
+      status: context.status,
+      verification_status: context.verification_status,
+      verification_status_label: context.verification_status_label,
+      credential_url: context.credential_url,
+      qr_code_url: context.qr_code_url,
+      linkedin_share_url: context.linkedin_share_url,
+      user_email: context.user_email,
+      course_description: context.course_description
+    });
   } catch (error) {
     console.error("Error verifying certificate:", error);
     res.status(500).json({ message: "Failed to verify certificate" });
   }
 }
 
+// Public verification details endpoint
+export async function getCertificateByIdController(req, res) {
+  try {
+    const { certificateId } = req.params;
+    const record = await fetchCertificateVerificationRecord(certificateId);
+
+    if (!record) {
+      return res.status(404).json({
+        message: "Certificate not found",
+        verification_status: "not_found"
+      });
+    }
+
+    const context = await buildVerificationContext(record, req);
+
+    res.json({
+      success: true,
+      data: context
+    });
+  } catch (error) {
+    console.error("Error getting certificate by id:", error);
+    res.status(500).json({ message: "Failed to load certificate" });
+  }
+}
+
+// Public HTML verification page
+export async function renderCertificateVerificationPageController(req, res) {
+  try {
+    const { certificateId } = req.params;
+    const record = await fetchCertificateVerificationRecord(certificateId);
+
+    if (!record) {
+      const notFoundContext = {
+        certificate_id: certificateId,
+        verification_status: "not_found",
+        verification_status_label: "Not Found",
+        organization_name: ORGANIZATION_NAME,
+        verification_url: buildVerificationUrl(req, certificateId),
+        linkedin_share_url: buildLinkedInShareUrl(buildVerificationUrl(req, certificateId))
+      };
+
+      res.status(404);
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.setHeader("Cache-Control", "no-store");
+      return res.send(renderVerificationPageHtml(notFoundContext));
+    }
+
+    const context = await buildVerificationContext(record, req);
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
+    return res.send(renderVerificationPageHtml(context));
+  } catch (error) {
+    console.error("Error rendering verification page:", error);
+    res.status(500).json({ message: "Failed to load verification page" });
+  }
+}
+
+// Generate LinkedIn share URL for a certificate
+export async function shareCertificateOnLinkedInController(req, res) {
+  try {
+    const { certificateId, certificate_id, credential_url } = req.body || {};
+    const identifier = sanitizeInput(certificateId || certificate_id || "").trim();
+    const directUrl = sanitizeInput(credential_url || "").trim();
+
+    let shareCredentialUrl = directUrl;
+    if (!shareCredentialUrl && identifier) {
+      const record = await fetchCertificateVerificationRecord(identifier);
+      if (record) {
+        const context = await buildVerificationContext(record, req);
+        shareCredentialUrl = context.credential_url;
+      }
+    }
+
+    if (!shareCredentialUrl) {
+      return res.status(400).json({
+        message: "A certificate ID or credential URL is required"
+      });
+    }
+
+    res.json({
+      success: true,
+      credential_url: shareCredentialUrl,
+      linkedin_share_url: buildLinkedInShareUrl(shareCredentialUrl)
+    });
+  } catch (error) {
+    console.error("Error building LinkedIn share URL:", error);
+    res.status(500).json({ message: "Failed to build LinkedIn share URL" });
+  }
+}
+
 // Generate certificate (admin only)
 export async function generateCertificateController(req, res) {
   try {
-    const { student_id, course_id } = req.body;
+    const {
+      student_id,
+      user_id,
+      course_id,
+      full_name,
+      certificate_title,
+      organization_name,
+      expiry_date
+    } = req.body || {};
+
+    const resolvedUserId = student_id || user_id;
     
+    if (!resolvedUserId || !course_id) {
+      return res.status(400).json({ message: "student_id/user_id and course_id are required" });
+    }
+
     // Check if certificate already exists
     const existingQuery = `
       SELECT id FROM certificates 
-      WHERE student_id = $1 AND course_id = $2
+      WHERE COALESCE(student_id, user_id) = $1 AND course_id = $2
     `;
-    const existingResult = await pool.query(existingQuery, [student_id, course_id]);
+    const existingResult = await pool.query(existingQuery, [resolvedUserId, course_id]);
     
     if (existingResult.rows.length > 0) {
       return res.status(400).json({ message: "Certificate already exists for this student and course" });
@@ -450,7 +1044,7 @@ export async function generateCertificateController(req, res) {
     // Get student and course information
     const infoQuery = `
       SELECT 
-        u.first_name || ' ' || u.last_name as student_name,
+        COALESCE(NULLIF(CONCAT_WS(' ', u.first_name, u.last_name), ''), u.name) as student_name,
         u.email as student_email,
         course.title as course_title,
         course.description as course_description
@@ -459,53 +1053,86 @@ export async function generateCertificateController(req, res) {
       WHERE u.id = $1
     `;
     
-    const { rows } = await pool.query(infoQuery, [student_id, course_id]);
+    const { rows } = await pool.query(infoQuery, [resolvedUserId, course_id]);
     
     if (rows.length === 0) {
       return res.status(404).json({ message: "Student or course not found" });
     }
     
     const studentInfo = rows[0];
-    const certificateCode = generateCertificateCode();
-    const issueDate = new Date().toISOString().split('T')[0];
-    const verifyUrl = `${req.protocol}://${req.get('host')}/verify/${certificateCode}`;
+    const certificateId = generateCertificateIdentifier();
+    const certificateCode = certificateId;
+    const issueDate = new Date().toISOString();
+    const certificateTitle = sanitizeInput(certificate_title || studentInfo.course_title || "Certificate of Completion");
+    const recipientName = sanitizeInput(full_name || studentInfo.student_name || "Unknown Recipient");
+    const issuerName = sanitizeInput(organization_name || ORGANIZATION_NAME);
+    const verifyUrl = buildVerificationUrl(req, certificateId);
     const qrCodeUrl = await generateQrDataUrl(verifyUrl);
     
     // Generate certificate HTML
     const certificateData = {
-      student_name: studentInfo.student_name,
-      course_title: studentInfo.course_title,
+      student_name: recipientName,
+      course_title: certificateTitle,
       course_description: studentInfo.course_description,
-      issue_date: issueDate,
+      issue_date: formatDisplayDate(issueDate),
       certificate_code: certificateCode,
       qr_code_url: qrCodeUrl
     };
     
     const certificateHtml = populateCertificateTemplate(CERTIFICATE_TEMPLATE, certificateData);
+    const credentialUrl = verifyUrl;
     
     // Insert certificate into database
     const insertQuery = `
       INSERT INTO certificates (
-        student_id, 
-        course_id, 
-        issue_date, 
-        certificate_code, 
-        certificate_html, 
+        user_id,
+        student_id,
+        course_id,
+        certificate_id,
+        full_name,
+        certificate_title,
+        organization_name,
+        issue_date,
+        issued_at,
+        expiry_date,
+        credential_url,
+        certificate_url,
+        qr_code_url,
+        certificate_code,
+        certificate_html,
         status
-      ) VALUES ($1, $2, $3, $4, $5, 'issued')
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, 'issued')
       RETURNING *
     `;
     
     const { rows: [certificate] } = await pool.query(insertQuery, [
-      student_id,
+      resolvedUserId,
+      resolvedUserId,
       course_id,
+      certificateId,
+      recipientName,
+      certificateTitle,
+      issuerName,
       issueDate,
+      issueDate,
+      expiry_date || null,
+      credentialUrl,
+      credentialUrl,
+      qrCodeUrl,
       certificateCode,
       certificateHtml
     ]);
     
     res.status(201).json({
       ...certificate,
+      certificate_id: certificateId,
+      certificate_code: certificateCode,
+      full_name: recipientName,
+      certificate_title: certificateTitle,
+      organization_name: issuerName,
+      credential_url: credentialUrl,
+      qr_code_url: qrCodeUrl,
+      verification_url: verifyUrl,
       student_name: studentInfo.student_name,
       course_title: studentInfo.course_title,
       course_description: studentInfo.course_description
@@ -527,7 +1154,7 @@ export async function getCertificateStatsController(req, res) {
     const monthQuery = `
       SELECT COUNT(*) as this_month 
       FROM certificates 
-      WHERE DATE_TRUNC('month', issued_at) = DATE_TRUNC('month', CURRENT_DATE)
+      WHERE DATE_TRUNC('month', COALESCE(issue_date, issued_at, created_at)) = DATE_TRUNC('month', CURRENT_DATE)
     `;
     const { rows: [monthResult] } = await pool.query(monthQuery);
     
@@ -567,10 +1194,11 @@ export async function searchCertificatesController(req, res) {
     
     if (query) {
       whereConditions.push(`(
-        u.name ILIKE $${paramIndex} OR 
+        COALESCE(NULLIF(CONCAT_WS(' ', u.first_name, u.last_name), ''), u.name) ILIKE $${paramIndex} OR 
         u.email ILIKE $${paramIndex} OR 
         course.title ILIKE $${paramIndex} OR 
-        c.certificate_code ILIKE $${paramIndex}
+        c.certificate_code ILIKE $${paramIndex} OR
+        c.certificate_id ILIKE $${paramIndex}
       )`);
       queryParams.push(`%${query}%`);
       paramIndex++;
@@ -581,15 +1209,25 @@ export async function searchCertificatesController(req, res) {
       queryParams.push(course_id);
       paramIndex++;
     }
+
+    if (status) {
+      if (String(status).toLowerCase() === "valid") {
+        whereConditions.push(`COALESCE(c.status, 'issued') IN ('issued', 'valid')`);
+      } else {
+        whereConditions.push(`LOWER(COALESCE(c.status, '')) = LOWER($${paramIndex})`);
+        queryParams.push(status);
+        paramIndex++;
+      }
+    }
     
     if (date_from) {
-      whereConditions.push(`c.issued_at >= $${paramIndex}`);
+      whereConditions.push(`COALESCE(c.issue_date, c.issued_at, c.created_at) >= $${paramIndex}`);
       queryParams.push(date_from);
       paramIndex++;
     }
     
     if (date_to) {
-      whereConditions.push(`c.issued_at <= $${paramIndex}`);
+      whereConditions.push(`COALESCE(c.issue_date, c.issued_at, c.created_at) <= $${paramIndex}`);
       queryParams.push(date_to);
       paramIndex++;
     }
@@ -600,7 +1238,7 @@ export async function searchCertificatesController(req, res) {
     const countQuery = `
       SELECT COUNT(*) as total
       FROM certificates c
-      LEFT JOIN users u ON c.user_id = u.id
+      LEFT JOIN users u ON u.id = COALESCE(c.user_id, c.student_id)
       LEFT JOIN courses course ON c.course_id = course.id
       ${whereClause}
     `;
@@ -611,17 +1249,20 @@ export async function searchCertificatesController(req, res) {
     const searchQuery = `
       SELECT 
         c.id,
-        c.certificate_code,
-        c.issued_at,
-        u.name as student_name,
+        COALESCE(c.certificate_id, c.certificate_code) AS certificate_id,
+        COALESCE(c.certificate_code, c.certificate_id) AS certificate_code,
+        COALESCE(c.issue_date, c.issued_at, c.created_at) AS issued_at,
+        COALESCE(c.status, 'issued') AS status,
+        COALESCE(c.credential_url, c.certificate_url) AS credential_url,
+        COALESCE(NULLIF(CONCAT_WS(' ', u.first_name, u.last_name), ''), u.name) as student_name,
         u.email as student_email,
         course.title as course_title,
         course.description as course_description
       FROM certificates c
-      LEFT JOIN users u ON c.user_id = u.id
+      LEFT JOIN users u ON u.id = COALESCE(c.user_id, c.student_id)
       LEFT JOIN courses course ON c.course_id = course.id
       ${whereClause}
-      ORDER BY c.issued_at DESC
+      ORDER BY COALESCE(c.issue_date, c.issued_at, c.created_at) DESC
       LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
     `;
     
@@ -645,13 +1286,15 @@ export async function revokeCertificateController(req, res) {
   try {
     const { certificateId } = req.params;
     const { reason } = req.body;
+    const isNumericId = /^\d+$/.test(String(certificateId));
     
     const query = `
       UPDATE certificates 
       SET status = 'revoked', 
           revoked_at = CURRENT_TIMESTAMP,
-          revoke_reason = $2
-      WHERE id = $1
+          revoke_reason = $2,
+          updated_at = CURRENT_TIMESTAMP
+      WHERE ${isNumericId ? "id = $1" : "COALESCE(certificate_id, certificate_code) = $1"}
       RETURNING *
     `;
     
@@ -672,11 +1315,13 @@ export async function revokeCertificateController(req, res) {
 export async function downloadCertificatePdfController(req, res) {
   try {
     const { certificateId } = req.params;
+    const isNumericId = /^\d+$/.test(String(certificateId));
     
     const query = `
       SELECT certificate_html, certificate_pdf_url, certificate_code
       FROM certificates 
-      WHERE id = $1 AND status = 'issued'
+      WHERE ${isNumericId ? "id = $1" : "COALESCE(certificate_id, certificate_code) = $1"}
+        AND status IN ('issued', 'valid')
     `;
     
     const { rows } = await pool.query(query, [certificateId]);
@@ -706,6 +1351,9 @@ export async function downloadCertificatePdfController(req, res) {
 export const getCertificatePreview = catchAsync(getCertificatePreviewController);
 export const getStudentCertificates = catchAsync(getStudentCertificatesController);
 export const verifyCertificate = catchAsync(verifyCertificateController);
+export const getCertificateById = catchAsync(getCertificateByIdController);
+export const renderCertificateVerificationPage = catchAsync(renderCertificateVerificationPageController);
+export const shareCertificateOnLinkedIn = catchAsync(shareCertificateOnLinkedInController);
 export const generateCertificate = catchAsync(generateCertificateController);
 export const getCertificateStats = catchAsync(getCertificateStatsController);
 export const searchCertificates = catchAsync(searchCertificatesController);

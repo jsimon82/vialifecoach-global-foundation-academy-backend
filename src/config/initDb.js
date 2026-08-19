@@ -1,4 +1,5 @@
 import { pool } from "./postgres.js";
+import { initCoordinatorDatabase } from "./initCoordinatorDb.js";
 
 export async function initDatabaseSchema() {
   // ======= CORE TABLES =======
@@ -217,14 +218,95 @@ export async function initDatabaseSchema() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS certificates (
       id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+      student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
       course_id INTEGER NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
-      issued_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      certificate_url TEXT,
+      certificate_id TEXT UNIQUE,
       certificate_code TEXT UNIQUE,
+      full_name TEXT,
+      certificate_title TEXT,
+      organization_name TEXT,
+      issue_date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      issued_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      expiry_date TIMESTAMPTZ,
+      status TEXT NOT NULL DEFAULT 'issued',
+      credential_url TEXT,
+      certificate_url TEXT,
+      qr_code_url TEXT,
+      certificate_html TEXT,
+      certificate_pdf_url TEXT,
+      revoked_at TIMESTAMPTZ,
+      revoke_reason TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       UNIQUE (user_id, course_id)
     );
   `);
+
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS student_id INTEGER REFERENCES users(id) ON DELETE CASCADE;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_id TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_code TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS full_name TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_title TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS organization_name TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS issue_date TIMESTAMPTZ NOT NULL DEFAULT NOW();`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS issued_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS expiry_date TIMESTAMPTZ;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'issued';`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS credential_url TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_url TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS qr_code_url TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_html TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS certificate_pdf_url TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS revoked_at TIMESTAMPTZ;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS revoke_reason TEXT;`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`);
+  await pool.query(`ALTER TABLE certificates ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();`);
+
+  await pool.query(`
+    UPDATE certificates
+    SET certificate_id = COALESCE(certificate_id, certificate_code)
+    WHERE certificate_id IS NULL AND certificate_code IS NOT NULL
+  `);
+  await pool.query(`
+    UPDATE certificates
+    SET certificate_code = COALESCE(certificate_code, certificate_id)
+    WHERE certificate_code IS NULL AND certificate_id IS NOT NULL
+  `);
+  await pool.query(`
+    UPDATE certificates
+    SET user_id = COALESCE(user_id, student_id),
+        student_id = COALESCE(student_id, user_id)
+    WHERE user_id IS NULL OR student_id IS NULL
+  `);
+  await pool.query(`
+    UPDATE certificates
+    SET issue_date = COALESCE(issue_date, issued_at, created_at),
+        issued_at = COALESCE(issued_at, issue_date, created_at)
+    WHERE issue_date IS NULL OR issued_at IS NULL
+  `);
+  await pool.query(`
+    UPDATE certificates c
+    SET full_name = COALESCE(c.full_name, u.name),
+        credential_url = COALESCE(c.credential_url, c.certificate_url),
+        certificate_url = COALESCE(c.certificate_url, c.credential_url),
+        organization_name = COALESCE(c.organization_name, 'Vialifecoach Global Foundation')
+    FROM users u
+    WHERE u.id = COALESCE(c.user_id, c.student_id)
+      AND (c.full_name IS NULL OR c.credential_url IS NULL OR c.certificate_url IS NULL OR c.organization_name IS NULL)
+  `);
+  await pool.query(`
+    UPDATE certificates c
+    SET certificate_title = COALESCE(c.certificate_title, course.title)
+    FROM courses course
+    WHERE course.id = c.course_id
+      AND c.certificate_title IS NULL
+  `);
+
+  await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_certificates_certificate_id ON certificates(certificate_id);`);
+  await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_certificates_certificate_code ON certificates(certificate_code);`);
+  await pool.query(`CREATE INDEX IF NOT EXISTS idx_certificates_status ON certificates(status);`);
+  await pool.query(`CREATE INDEX IF NOT EXISTS idx_certificates_issue_date ON certificates(issue_date);`);
 
   // Support tickets
   await pool.query(`
@@ -274,4 +356,6 @@ export async function initDatabaseSchema() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
+
+  await initCoordinatorDatabase();
 }

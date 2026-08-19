@@ -1,5 +1,6 @@
 import "../config/env.js";
 import { findUserByEmail,createUser, verifyUser, updateUser } from "../models/User.model.js";
+import { findCoordinatorByEmail } from "../models/Coordinator.model.js";
 import { AppError } from "../utils/AppError.js";
 import { catchAsync } from "../utils/asyncHelpers.js";
 import { generateAccessToken } from "../utils/utils.jwt.js";
@@ -10,6 +11,7 @@ import { sendPasswordResetEmail, sendVerificationEmail } from "../services/email
 import { pool } from "../config/postgres.js";
 import crypto from "crypto";
 import { validateAdminCredentials, getAdminCredentials } from "../utils/adminCredentials.js";
+import { recordAuditLog } from "../utils/auditLog.js";
 
 const ADMIN_EMAIL = getAdminCredentials().email;
 const isSecureDeployment =
@@ -27,10 +29,18 @@ const refreshCookieOptions = {
 
 // ======= LOGIN CONTROLLER =======
 export const login = catchAsync(async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
+    const trimmedEmail = String(email || "").trim();
+    const normalizedEmail = trimmedEmail.toLowerCase();
+    const requestedScope = String(req.body?.scope || req.body?.role || "").trim().toLowerCase();
+    const coordinatorOnlyLogin = requestedScope === "coordinator";
+
+    if (!trimmedEmail || !password) {
+      throw new AppError("Email and password are required", 400);
+    }
 
     // ======= ADMIN LOGIN (using encoded credentials) =======
-    if (validateAdminCredentials(email, password)) {
+    if (validateAdminCredentials(trimmedEmail, password)) {
       const adminUser = { id: 0, name: "Admin", email: "academy@vialifecoach.org", role: "admin" };
       const accessToken = generateAccessToken({ id: adminUser.id, email: adminUser.email, role: adminUser.role });
       const refreshToken = jwt.sign({ email: adminUser.email }, process.env.REFRESH_TOKEN_SECRET);
@@ -42,6 +52,16 @@ export const login = catchAsync(async (req, res) => {
       );
 
       res.cookie('refreshToken', refreshToken, refreshCookieOptions);
+
+      await recordAuditLog({
+        actorUserId: adminUser.id,
+        actorEmail: adminUser.email,
+        action: "auth.login",
+        entityType: "admin",
+        entityId: String(adminUser.id),
+        details: { role: adminUser.role },
+        ipAddress: req.ip || req.connection?.remoteAddress || null,
+      });
 
       return res.json({
         accessToken,
@@ -56,7 +76,70 @@ export const login = catchAsync(async (req, res) => {
     }
     // ======= END ADMIN LOGIN =======
 
-    const user = await findUserByEmail(email);
+    const coordinator = await findCoordinatorByEmail(normalizedEmail);
+    if (coordinator) {
+      if (coordinator.is_active === false) {
+        throw new AppError("Coordinator account is disabled", 403);
+      }
+
+      const isValidCoordinatorPassword = await bcrypt.compare(password, coordinator.password_hash);
+      if (!isValidCoordinatorPassword) throw new AppError("Invalid email or password", 401);
+
+      const accessToken = generateAccessToken({ id: coordinator.id, email: coordinator.email, role: "coordinator" });
+      const refreshToken = jwt.sign({ email: coordinator.email, role: "coordinator" }, process.env.REFRESH_TOKEN_SECRET);
+
+      await Token.findOneAndUpdate(
+        { userEmail: coordinator.email },
+        { refreshToken, createdAt: new Date() },
+        { upsert: true, new: true }
+      );
+
+      await pool.query(
+        `UPDATE coordinators
+         SET last_login = NOW(), updated_at = NOW()
+         WHERE id = $1`,
+        [coordinator.id]
+      );
+
+      res.cookie('refreshToken', refreshToken, refreshCookieOptions);
+
+      await recordAuditLog({
+        actorUserId: coordinator.id,
+        actorEmail: coordinator.email,
+        action: "auth.login",
+        entityType: "coordinator",
+        entityId: String(coordinator.id),
+        details: {
+          role: "coordinator",
+          department: coordinator.department || null,
+        },
+        ipAddress: req.ip || req.connection?.remoteAddress || null,
+      });
+
+      const coordinatorUser = {
+        id: coordinator.id,
+        name: `${coordinator.first_name} ${coordinator.last_name}`.trim(),
+        email: coordinator.email,
+        role: "coordinator",
+        verified: true,
+        department: coordinator.department || null,
+      };
+
+      return res.json({
+        accessToken,
+        user: coordinatorUser,
+        coordinator: coordinatorUser,
+      });
+    }
+
+    if (coordinatorOnlyLogin) {
+      throw new AppError("Invalid email or password", 401);
+    }
+
+    let user = await findUserByEmail(trimmedEmail);
+    if (!user && normalizedEmail !== trimmedEmail) {
+      user = await findUserByEmail(normalizedEmail);
+    }
     if (!user) throw new AppError("User not found", 404);
 
     // check password
@@ -130,6 +213,15 @@ export const getRefreshToken = catchAsync(async (req, res) => {
     }
     // ======= END ADMIN TOKEN REFRESH =======
 
+    const coordinator = await findCoordinatorByEmail(String(user.email || "").trim().toLowerCase());
+    if (coordinator) {
+      if (coordinator.is_active === false) {
+        return res.status(403).json({ message: "Coordinator account is disabled" });
+      }
+      const accessToken = generateAccessToken({ id: coordinator.id, email: coordinator.email, role: "coordinator" });
+      return res.json({ accessToken });
+    }
+
     const currentUser = await findUserByEmail(user.email);
     if (!currentUser) return res.status(404).json({ message: "User not found" });
     const accessToken = generateAccessToken({ id: currentUser.id, email: currentUser.email, role: currentUser.role });
@@ -186,6 +278,21 @@ export const getMe = catchAsync(async (req, res) => {
       });
     }
     // ======= END ADMIN USER CHECK =======
+
+    const coordinator = await findCoordinatorByEmail(String(req.user.email || "").trim().toLowerCase());
+    if (coordinator) {
+      return res.json({
+        id: coordinator.id,
+        name: `${coordinator.first_name} ${coordinator.last_name}`.trim(),
+        email: coordinator.email,
+        photo: null,
+        role: "coordinator",
+        verified: true,
+        department: coordinator.department || null,
+        is_active: coordinator.is_active,
+        last_login: coordinator.last_login || null,
+      });
+    }
 
     const user = await findUserByEmail(req.user.email);
     if (!user) return res.status(404).json({ message: "User not found" });

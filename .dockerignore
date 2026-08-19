@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log*
+*.log
+.git
+.gitignore
+.env
+.env.*
+uploads
+data
+database
+generated_videos
+temp_videos
+coverage
+__pycache__
+*.local

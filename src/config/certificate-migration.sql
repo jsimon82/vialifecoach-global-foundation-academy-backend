@@ -25,22 +25,35 @@ CREATE TABLE IF NOT EXISTS course_completions (
 -- Certificates Table
 CREATE TABLE IF NOT EXISTS certificates (
   id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE,
+  certificate_id VARCHAR(120) UNIQUE,
+  certificate_code VARCHAR(120) UNIQUE,
+  full_name TEXT,
+  certificate_title TEXT,
+  organization_name TEXT,
   issue_date TIMESTAMP DEFAULT NOW(),
-  certificate_code VARCHAR(50) UNIQUE NOT NULL,
-  certificate_html TEXT NOT NULL,
+  issued_at TIMESTAMP DEFAULT NOW(),
+  expiry_date TIMESTAMP,
+  status VARCHAR(50) DEFAULT 'issued',
+  credential_url TEXT,
+  certificate_url TEXT,
+  qr_code_url TEXT,
+  certificate_html TEXT,
   certificate_pdf_url VARCHAR(500),
-  status VARCHAR(50) DEFAULT 'issued' CHECK (status IN ('issued', 'revoked', 'expired')),
   revoked_at TIMESTAMP,
   revoke_reason TEXT,
   created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  updated_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE (user_id, course_id)
 );
 
 -- Indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_certificates_user_id ON certificates(user_id);
 CREATE INDEX IF NOT EXISTS idx_certificates_student_id ON certificates(student_id);
 CREATE INDEX IF NOT EXISTS idx_certificates_course_id ON certificates(course_id);
+CREATE INDEX IF NOT EXISTS idx_certificates_certificate_id ON certificates(certificate_id);
 CREATE INDEX IF NOT EXISTS idx_certificates_code ON certificates(certificate_code);
 CREATE INDEX IF NOT EXISTS idx_certificates_status ON certificates(status);
 CREATE INDEX IF NOT EXISTS idx_certificates_issue_date ON certificates(issue_date);

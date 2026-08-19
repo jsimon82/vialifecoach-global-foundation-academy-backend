@@ -52,7 +52,7 @@ communityRouter.get("/community/success-stories", listCommunitySuccessStoriesCon
 communityRouter.post("/community/success-stories", authenticateToken, createCommunitySuccessStoryController);
 communityRouter.get("/community/success-stories/can-post", authenticateToken, getSuccessStoryPermissionsController);
 
-communityRouter.get("/community/mentors", authenticateToken, listCommunityMentorsController);
+communityRouter.get("/community/mentors", optionalAuthenticateToken, listCommunityMentorsController);
 communityRouter.post("/community/mentors/:mentorId/request", authenticateToken, requestMentorshipController);
 
 // ======== ADMIN CONVERSATION AUDIT ROUTES ========

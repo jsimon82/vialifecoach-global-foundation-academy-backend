@@ -1,12 +1,13 @@
 import '../config/env.js';
 import { findUserByEmail } from "../models/User.model.js";
+import { findCoordinatorByEmail } from "../models/Coordinator.model.js";
 import jwt from "jsonwebtoken";
 import { getAdminCredentials } from "../utils/adminCredentials.js";
 
 // Get encoded admin email
 const HARDCODED_ADMIN_EMAIL = getAdminCredentials().email;
 
-function normalizeRole(role) {
+export function normalizeRole(role) {
   if (!role) return role;
   if (role === "lecturer") return "instructor";
   return role;
@@ -34,6 +35,28 @@ export async function authenticateToken(req, res, next) {
     }
     // ======= END HARDCODED ADMIN BYPASS =======
 
+    // Check if it's a coordinator token
+    if (payload.role === 'coordinator') {
+      const coordinator = await findCoordinatorByEmail(payload.email);
+      if (!coordinator || coordinator.is_active === false) {
+        return res.status(401).json({ message: "Coordinator not found for this token" });
+      }
+      const coordinatorName = [coordinator.first_name, coordinator.last_name]
+        .filter(Boolean)
+        .join(" ")
+        .trim() || coordinator.name || coordinator.email;
+
+      req.user = {
+        id: coordinator.id,
+        email: coordinator.email,
+        name: coordinatorName,
+        role: 'coordinator',
+        verified: true,
+      };
+      return next();
+    }
+
+    // Check if it's a regular user token
     const user = await findUserByEmail(payload.email);
     if (!user) return res.status(401).json({ message: "User not found for this token" });
 
@@ -73,6 +96,25 @@ export async function optionalAuthenticateToken(req, res, next) {
       return next();
     }
     // ======= END HARDCODED ADMIN BYPASS =======
+
+    if (payload.role === 'coordinator') {
+      const coordinator = await findCoordinatorByEmail(payload.email);
+      if (coordinator && coordinator.is_active !== false) {
+        const coordinatorName = [coordinator.first_name, coordinator.last_name]
+          .filter(Boolean)
+          .join(" ")
+          .trim() || coordinator.name || coordinator.email;
+
+        req.user = {
+          id: coordinator.id,
+          email: coordinator.email,
+          name: coordinatorName,
+          role: 'coordinator',
+          verified: true,
+        };
+      }
+      return next();
+    }
 
     const user = await findUserByEmail(payload.email);
     if (!user) return res.status(401).json({ message: "User not found for this token" });

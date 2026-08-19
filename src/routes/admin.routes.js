@@ -96,6 +96,15 @@ import {
   exportReportController,
   generateAdmissionPdfController,
 } from "../controllers/admin.pro.controller.js";
+import {
+  createCoordinator,
+  deleteCoordinator,
+  getAllCoordinators,
+  getCoordinatorActivity,
+  getCoordinatorById,
+  toggleCoordinatorStatus,
+  updateCoordinator,
+} from "../controllers/coordinator.controller.js";
 import { authenticateToken, requireRoles } from "../middlewares/auth.middleware.js";
 import multer from "multer";
 
@@ -113,6 +122,15 @@ adminRouter.get("/admin/dashboard", getAdminDashboardController);
 adminRouter.get("/admin/users", getAdminUsersController);
 adminRouter.patch("/admin/users/:id/role", updateUserRoleController);
 adminRouter.delete("/admin/users/:id", deleteUserController);
+
+// ======== COORDINATOR MANAGEMENT ========
+adminRouter.get("/admin/coordinators/activity", getCoordinatorActivity);
+adminRouter.get("/admin/coordinators", getAllCoordinators);
+adminRouter.post("/admin/coordinators", createCoordinator);
+adminRouter.get("/admin/coordinators/:id", getCoordinatorById);
+adminRouter.patch("/admin/coordinators/:id", updateCoordinator);
+adminRouter.patch("/admin/coordinators/:id/toggle-status", toggleCoordinatorStatus);
+adminRouter.delete("/admin/coordinators/:id", deleteCoordinator);
 
 // ======== COURSE MANAGEMENT ========
 // Get all courses (with optional filters)
