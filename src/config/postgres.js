@@ -5,14 +5,22 @@ dotenv.config();
 
 const { Pool } = pkg;
 
-// Use local PostgreSQL for internal data (program keywords, AI configs)
-// Fallback to local development PostgreSQL
-const connectionString =
+const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER === 'true';
+const configuredConnectionString =
+  process.env.DATABASE_URL ||
   process.env.POSTGRES_URL ||
   process.env.PG_CONNECTION_STRING ||
   process.env.DATABASE_URI ||
-  process.env.POSTGRES_CONNECTION_STRING ||
-  `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD || 'admin'}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 5432}/${process.env.DB_NAME || 'vialifecoach_db'}`;
+  process.env.POSTGRES_CONNECTION_STRING;
+
+// Keep the localhost fallback for development, but never risk production writes going to localhost.
+const connectionString = configuredConnectionString || (!isProduction
+  ? `postgresql://${process.env.DB_USER || 'postgres'}:${process.env.DB_PASSWORD || 'admin'}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 5432}/${process.env.DB_NAME || 'vialifecoach_db'}`
+  : null);
+
+if (isProduction && !configuredConnectionString) {
+  throw new Error('Production PostgreSQL is not configured. Set DATABASE_URL or another PostgreSQL connection variable.');
+}
 
 // Supabase is handled separately via supabase client
 
