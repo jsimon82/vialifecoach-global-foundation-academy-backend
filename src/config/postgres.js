@@ -51,6 +51,7 @@ const poolConfig = connectionString
   ? {
       connectionString,
       ssl: useSsl,
+      family: 4,
       max: Number(process.env.PG_POOL_MAX || 10),
     }
   : {
@@ -60,6 +61,7 @@ const poolConfig = connectionString
       password: process.env.PG_PASSWORD || process.env.DB_PASSWORD,
       port: Number(process.env.PG_PORT || process.env.DB_PORT || 5432),
       ssl: useSsl,
+      family: 4,
       max: Number(process.env.PG_POOL_MAX || 10),
     };
 
